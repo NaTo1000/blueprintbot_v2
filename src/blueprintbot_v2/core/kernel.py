@@ -9,6 +9,10 @@ from typing import Dict, Any, List, Callable, Coroutine, Optional
 from blueprintbot_v2.core.exceptions import ProcessingError, ResourceError, TimeoutError
 from blueprintbot_v2.ai.advanced_ai_engine import AdvancedAIEngine
 from blueprintbot_v2.quantum.quantum_processor import QuantumProcessor
+from blueprintbot_v2.core.quantum_kernel_integration import (
+    KernelQuantumManager,
+    initialize_quantum_kernel_integration,
+)
 
 logger = logging.getLogger("blueprintbot_v2.core.kernel")
 
@@ -69,6 +73,7 @@ class BlueprintBotKernel:
         self.resource_manager = ResourceManager()
         self.ai_engine = AdvancedAIEngine() # Assuming already initialized
         self.quantum_processor = QuantumProcessor() # Assuming already initialized
+        self.quantum_manager: Optional[KernelQuantumManager] = None  # Distributed quantum integration
         self.ipc_channels: Dict[str, asyncio.Queue] = {}
         self._scheduler_task: Optional[asyncio.Task] = None
         logger.info("BlueprintBotKernel initialized.")
@@ -81,6 +86,15 @@ class BlueprintBotKernel:
         await self.resource_manager.initialize()
         await self.ai_engine.initialize()
         await self.quantum_processor.initialize()
+        
+        # Initialize distributed quantum architecture
+        try:
+            self.quantum_manager = await initialize_quantum_kernel_integration()
+            logger.info("Distributed quantum architecture initialized")
+        except Exception as e:
+            logger.warning(f"Failed to initialize distributed quantum architecture: {str(e)}")
+            self.quantum_manager = None
+        
         self._scheduler_task = asyncio.create_task(self._scheduler_loop())
         logger.info("Kernel sub-systems initialized.")
 
@@ -89,6 +103,12 @@ class BlueprintBotKernel:
         Shuts down the kernel and all running processes.
         """
         logger.info("Shutting down BlueprintBotKernel...")
+        
+        # Shutdown quantum manager
+        if self.quantum_manager:
+            await self.quantum_manager.shutdown()
+            logger.info("Quantum manager shut down")
+        
         if self._scheduler_task:
             self._scheduler_task.cancel()
             try:
