@@ -1,0 +1,590 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "blueprintbot-v2"
+version = "2.0.0"
+description = "Advanced AI-powered construction planning platform with quantum integration"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "BlueprintBot Team", email = "team@blueprintbot.ai"},
+]
+maintainers = [
+    {name = "BlueprintBot Team", email = "team@blueprintbot.ai"},
+]
+keywords = [
+    "construction",
+    "ai",
+    "quantum-computing",
+    "blueprints",
+    "automation",
+    "saas",
+    "enterprise",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Manufacturing",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.5.0",
+    "sqlalchemy>=2.0.0",
+    "alembic>=1.13.0",
+    "asyncpg>=0.29.0",
+    "redis>=5.0.0",
+    "celery>=5.3.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "pandas>=2.1.0",
+    "scikit-learn>=1.3.0",
+    "tensorflow>=2.15.0",
+    "torch>=2.1.0",
+    "transformers>=4.35.0",
+    "opencv-python>=4.8.0",
+    "pillow>=10.0.0",
+    "matplotlib>=3.8.0",
+    "plotly>=5.17.0",
+    "qiskit>=0.45.0",
+    "qiskit-aer>=0.13.0",
+    "qiskit-ibm-runtime>=0.17.0",
+    "qiskit-optimization>=0.6.0",
+    "cirq>=1.3.0",
+    "pennylane>=0.33.0",
+    "pennylane-qiskit>=0.33.0",
+    "pytket>=1.21.0",
+    "braket>=1.73.0",
+    "httpx>=0.25.0",
+    "aiohttp>=3.9.0",
+    "websockets>=12.0",
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.7.0",
+    "pre-commit>=3.5.0",
+    "docker>=6.1.0",
+    "kubernetes>=28.1.0",
+    "prometheus-client>=0.19.0",
+    "structlog>=23.2.0",
+    "python-multipart>=0.0.6",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.1",
+    "jinja2>=3.1.2",
+    "minio>=7.2.0",
+    "boto3>=1.34.0",
+    "azure-storage-blob>=12.19.0",
+    "google-cloud-storage>=2.10.0",
+    "elasticsearch>=8.11.0",
+    "neo4j>=5.14.0",
+    "pymongo>=4.6.0",
+    "apache-airflow>=2.8.0",
+    "mlflow>=2.8.0",
+    "wandb>=0.16.0",
+    "optuna>=3.4.0",
+    "ray[tune]>=2.8.0",
+    "dask[complete]>=2023.12.0",
+    "joblib>=1.3.0",
+    "networkx>=3.2.0",
+    "igraph>=0.11.0",
+    "pyvis>=0.3.2",
+    "streamlit>=1.28.0",
+    "gradio>=4.7.0",
+    "dash>=2.14.0",
+    "bokeh>=3.3.0",
+    "seaborn>=0.13.0",
+    "altair>=5.2.0",
+    "folium>=0.15.0",
+    "geopandas>=0.14.0",
+    "shapely>=2.0.0",
+    "rasterio>=1.3.0",
+    "fiona>=1.9.0",
+    "pyproj>=3.6.0",
+    "geopy>=2.4.0",
+    "osmnx>=1.7.0",
+    "contextily>=1.4.0",
+    "xarray>=2023.12.0",
+    "zarr>=2.16.0",
+    "h5py>=3.10.0",
+    "tables>=3.9.0",
+    "pyarrow>=14.0.0",
+    "polars>=0.20.0",
+    "vaex>=4.17.0",
+    "modin[ray]>=0.25.0",
+    "cudf-cu11>=23.12.0",
+    "cupy-cuda11x>=12.3.0",
+    "numba>=0.58.0",
+    "cython>=3.0.0",
+    "pybind11>=2.11.0",
+    "nanobind>=1.8.0",
+    "maturin>=1.4.0",
+    "setuptools-rust>=1.8.0",
+    "wheel>=0.42.0",
+    "twine>=4.0.0",
+    "build>=1.0.0",
+    "pip-tools>=7.3.0",
+    "pipenv>=2023.11.0",
+    "poetry>=1.7.0",
+    "conda-build>=3.27.0",
+    "mamba>=1.5.0",
+    "micromamba>=1.5.0",
+    "pixi>=0.10.0",
+    "uv>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.5.0",
+    "pytest-benchmark>=4.0.0",
+    "hypothesis>=6.92.0",
+    "factory-boy>=3.3.0",
+    "faker>=20.1.0",
+    "freezegun>=1.2.0",
+    "responses>=0.24.0",
+    "httpretty>=1.1.0",
+    "vcr-py>=5.1.0",
+    "black>=23.0.0",
+    "isort>=5.13.0",
+    "flake8>=6.0.0",
+    "pylint>=3.0.0",
+    "mypy>=1.7.0",
+    "bandit>=1.7.0",
+    "safety>=2.3.0",
+    "pre-commit>=3.5.0",
+    "commitizen>=3.13.0",
+    "semantic-release>=8.5.0",
+    "bump2version>=1.0.0",
+    "sphinx>=7.2.0",
+    "sphinx-rtd-theme>=1.3.0",
+    "sphinx-autodoc-typehints>=1.25.0",
+    "myst-parser>=2.0.0",
+    "jupyter>=1.0.0",
+    "jupyterlab>=4.0.0",
+    "notebook>=7.0.0",
+    "ipywidgets>=8.1.0",
+    "ipython>=8.18.0",
+    "matplotlib>=3.8.0",
+    "seaborn>=0.13.0",
+    "plotly>=5.17.0",
+    "bokeh>=3.3.0",
+    "altair>=5.2.0",
+    "holoviews>=1.18.0",
+    "panel>=1.3.0",
+    "param>=2.0.0",
+    "datashader>=0.16.0",
+    "colorcet>=3.0.0",
+    "geoviews>=1.11.0",
+]
+quantum = [
+    "qiskit[all]>=0.45.0",
+    "qiskit-aer>=0.13.0",
+    "qiskit-ibm-runtime>=0.17.0",
+    "qiskit-optimization>=0.6.0",
+    "qiskit-machine-learning>=0.7.0",
+    "qiskit-finance>=0.4.0",
+    "qiskit-nature>=0.7.0",
+    "cirq[contrib]>=1.3.0",
+    "pennylane[all]>=0.33.0",
+    "pennylane-qiskit>=0.33.0",
+    "pennylane-cirq>=0.33.0",
+    "pytket[all]>=1.21.0",
+    "braket[all]>=1.73.0",
+    "forest-benchmarking>=0.8.0",
+    "pyquil>=4.5.0",
+    "quantum-inspire>=2.8.0",
+    "qulacs>=0.6.0",
+    "mitiq>=0.31.0",
+    "toqito>=1.0.0",
+    "qutip>=4.7.0",
+    "strawberryfields>=0.21.0",
+    "xanadu-cloud-client>=0.3.0",
+    "pennylane-xanadu>=0.33.0",
+    "amazon-braket-sdk>=1.73.0",
+    "amazon-braket-ocean-plugin>=1.16.0",
+    "ocean-tools>=0.8.0",
+    "dwave-system>=1.20.0",
+    "dwave-ocean-sdk>=6.9.0",
+    "dimod>=0.12.0",
+    "minorminer>=0.2.0",
+    "dwave-networkx>=0.8.0",
+    "dwave-preprocessing>=0.6.0",
+    "dwave-samplers>=1.0.0",
+    "dwave-tabu>=0.4.0",
+    "dwave-greedy>=0.3.0",
+    "dwave-hybrid>=0.6.0",
+    "dwave-inspector>=0.4.0",
+    "dwave-cloud-client>=0.10.0",
+    "dwavebinarycsp>=0.1.0",
+    "pennyLane-lightning[kokkos]>=0.33.0",
+    "pennylane-catalyst>=0.3.0",
+    "catalyst-runtime>=0.3.0",
+]
+ml = [
+    "tensorflow[and-cuda]>=2.15.0",
+    "torch[cuda]>=2.1.0",
+    "torchvision>=0.16.0",
+    "torchaudio>=2.1.0",
+    "transformers[torch,tf]>=4.35.0",
+    "datasets>=2.15.0",
+    "tokenizers>=0.15.0",
+    "accelerate>=0.25.0",
+    "peft>=0.7.0",
+    "bitsandbytes>=0.41.0",
+    "deepspeed>=0.12.0",
+    "fairscale>=0.4.0",
+    "lightning>=2.1.0",
+    "pytorch-lightning>=2.1.0",
+    "torchmetrics>=1.2.0",
+    "wandb>=0.16.0",
+    "tensorboard>=2.15.0",
+    "mlflow>=2.8.0",
+    "optuna>=3.4.0",
+    "ray[tune,serve]>=2.8.0",
+    "hyperopt>=0.2.0",
+    "scikit-optimize>=0.9.0",
+    "bayesian-optimization>=1.4.0",
+    "ax-platform>=0.3.0",
+    "botorch>=0.9.0",
+    "gpytorch>=1.11.0",
+    "pyro-ppl>=1.8.0",
+    "numpyro>=0.13.0",
+    "jax[cuda11_pip]>=0.4.0",
+    "jaxlib[cuda11_pip]>=0.4.0",
+    "flax>=0.7.0",
+    "optax>=0.1.0",
+    "chex>=0.1.0",
+    "dm-haiku>=0.0.10",
+    "rlax>=0.1.0",
+    "distrax>=0.1.0",
+    "tensorflow-probability>=0.22.0",
+    "tensorflow-datasets>=4.9.0",
+    "tensorflow-hub>=0.15.0",
+    "tensorflow-model-optimization>=0.7.0",
+    "tensorflow-addons>=0.22.0",
+    "tensorflow-io>=0.34.0",
+    "tensorflow-text>=2.15.0",
+    "tensorflow-graphics>=2021.12.3",
+    "tensorflow-quantum>=0.7.0",
+    "tensorflow-federated>=0.57.0",
+    "tensorflow-privacy>=0.8.0",
+    "tensorflow-lattice>=2.0.0",
+    "tensorflow-ranking>=0.5.0",
+    "tensorflow-recommenders>=0.7.0",
+    "tensorflow-serving-api>=2.15.0",
+    "tensorflow-transform>=1.15.0",
+    "tfx>=1.15.0",
+    "apache-beam[gcp]>=2.52.0",
+    "kubeflow-pipelines>=2.0.0",
+    "kfp>=2.5.0",
+    "vertex-ai>=1.38.0",
+    "google-cloud-aiplatform>=1.38.0",
+    "azure-ai-ml>=1.11.0",
+    "azureml-core>=1.54.0",
+    "sagemaker>=2.199.0",
+    "boto3>=1.34.0",
+    "botocore>=1.34.0",
+]
+cloud = [
+    "kubernetes>=28.1.0",
+    "docker>=6.1.0",
+    "docker-compose>=1.29.0",
+    "helm>=3.13.0",
+    "terraform>=1.6.0",
+    "pulumi>=3.95.0",
+    "ansible>=8.7.0",
+    "fabric>=3.2.0",
+    "paramiko>=3.4.0",
+    "boto3>=1.34.0",
+    "botocore>=1.34.0",
+    "awscli>=1.32.0",
+    "azure-cli>=2.55.0",
+    "google-cloud-sdk>=455.0.0",
+    "google-cloud-core>=2.4.0",
+    "google-cloud-storage>=2.10.0",
+    "google-cloud-bigquery>=3.13.0",
+    "google-cloud-pubsub>=2.18.0",
+    "google-cloud-logging>=3.8.0",
+    "google-cloud-monitoring>=2.16.0",
+    "google-cloud-trace>=1.12.0",
+    "google-cloud-error-reporting>=1.9.0",
+    "google-cloud-profiler>=4.1.0",
+    "google-cloud-debugger>=2.18.0",
+    "google-cloud-secret-manager>=2.16.0",
+    "google-cloud-kms>=2.19.0",
+    "google-cloud-iam>=2.12.0",
+    "google-cloud-resource-manager>=1.10.0",
+    "google-cloud-container>=2.34.0",
+    "google-cloud-run>=0.10.0",
+    "google-cloud-functions>=1.16.0",
+    "google-cloud-build>=3.20.0",
+    "google-cloud-deploy>=1.15.0",
+    "google-cloud-artifact-registry>=1.11.0",
+    "google-cloud-binary-authorization>=1.8.0",
+    "azure-identity>=1.15.0",
+    "azure-keyvault-secrets>=4.7.0",
+    "azure-storage-blob>=12.19.0",
+    "azure-storage-file-datalake>=12.13.0",
+    "azure-cosmos>=4.5.0",
+    "azure-servicebus>=7.11.0",
+    "azure-eventhub>=5.11.0",
+    "azure-monitor-opentelemetry-exporter>=1.0.0",
+    "azure-appconfiguration>=1.4.0",
+    "azure-containerregistry>=1.2.0",
+    "azure-mgmt-containerinstance>=10.1.0",
+    "azure-mgmt-containerservice>=27.0.0",
+    "azure-mgmt-web>=7.2.0",
+    "azure-mgmt-sql>=3.0.0",
+    "azure-mgmt-storage>=21.1.0",
+    "azure-mgmt-keyvault>=10.3.0",
+    "azure-mgmt-monitor>=6.0.0",
+    "azure-mgmt-loganalytics>=13.0.0",
+    "azure-mgmt-applicationinsights>=4.0.0",
+    "minio>=7.2.0",
+    "redis>=5.0.0",
+    "elasticsearch>=8.11.0",
+    "opensearch-py>=2.4.0",
+    "pymongo>=4.6.0",
+    "motor>=3.3.0",
+    "asyncpg>=0.29.0",
+    "psycopg2-binary>=2.9.0",
+    "aiomysql>=0.2.0",
+    "aiosqlite>=0.19.0",
+    "databases[postgresql,mysql,sqlite]>=0.8.0",
+    "sqlalchemy[asyncio]>=2.0.0",
+    "alembic>=1.13.0",
+    "aerich>=0.7.0",
+    "tortoise-orm>=0.20.0",
+    "peewee>=3.17.0",
+    "pony>=0.7.0",
+    "orator>=0.9.0",
+    "dataset>=1.6.0",
+    "records>=0.5.0",
+    "pyodbc>=5.0.0",
+    "cx-Oracle>=8.3.0",
+    "pymssql>=2.2.0",
+    "cassandra-driver>=3.28.0",
+    "neo4j>=5.14.0",
+    "py2neo>=2021.2.0",
+    "neomodel>=5.2.0",
+    "influxdb>=5.3.0",
+    "influxdb-client>=1.39.0",
+    "prometheus-client>=0.19.0",
+    "grafana-api>=1.0.0",
+    "jaeger-client>=4.8.0",
+    "opentelemetry-api>=1.21.0",
+    "opentelemetry-sdk>=1.21.0",
+    "opentelemetry-instrumentation>=0.42b0",
+    "opentelemetry-exporter-jaeger>=1.21.0",
+    "opentelemetry-exporter-prometheus>=1.12.0",
+    "opentelemetry-exporter-otlp>=1.21.0",
+    "sentry-sdk[fastapi]>=1.39.0",
+    "bugsnag>=4.6.0",
+    "rollbar>=1.0.0",
+    "airbrake-python>=1.4.0",
+    "honeybadger>=0.11.0",
+    "newrelic>=9.2.0",
+    "datadog>=0.48.0",
+    "ddtrace>=2.3.0",
+    "elastic-apm>=6.19.0",
+    "scout-apm>=3.0.0",
+    "instana>=2.0.0",
+    "signalfx>=1.2.0",
+    "wavefront-sdk-python>=1.8.0",
+    "lightstep>=5.0.0",
+    "zipkin-py>=0.20.0",
+    "py-zipkin>=0.21.0",
+    "opencensus>=0.11.0",
+    "opencensus-ext-azure>=1.1.0",
+    "opencensus-ext-flask>=0.8.0",
+    "opencensus-ext-django>=0.8.0",
+    "opencensus-ext-pyramid>=0.8.0",
+    "opencensus-ext-requests>=0.8.0",
+    "opencensus-ext-sqlalchemy>=0.1.0",
+    "opencensus-ext-postgresql>=0.1.0",
+    "opencensus-ext-mysql>=0.1.0",
+    "opencensus-ext-pymongo>=0.8.0",
+    "opencensus-ext-redis>=0.1.0",
+    "opencensus-ext-grpc>=0.1.0",
+    "opencensus-ext-httplib>=0.8.0",
+    "opencensus-ext-logging>=0.1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/NaTo1000/blueprintbot_v2"
+Documentation = "https://blueprintbot-v2.readthedocs.io/"
+Repository = "https://github.com/NaTo1000/blueprintbot_v2.git"
+Issues = "https://github.com/NaTo1000/blueprintbot_v2/issues"
+Changelog = "https://github.com/NaTo1000/blueprintbot_v2/blob/main/CHANGELOG.md"
+
+[project.scripts]
+blueprintbot = "blueprintbot_v2.cli:main"
+bpb = "blueprintbot_v2.cli:main"
+blueprintbot-server = "blueprintbot_v2.server:main"
+blueprintbot-worker = "blueprintbot_v2.worker:main"
+blueprintbot-scheduler = "blueprintbot_v2.scheduler:main"
+blueprintbot-migrate = "blueprintbot_v2.database:migrate"
+blueprintbot-seed = "blueprintbot_v2.database:seed"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml", "*.json", "*.toml", "*.cfg", "*.ini", "*.txt", "*.md", "*.rst", "*.html", "*.css", "*.js", "*.ts", "*.jsx", "*.tsx", "*.vue", "*.svelte", "*.sql", "*.graphql", "*.proto", "*.avro", "*.parquet", "*.arrow", "*.feather", "*.hdf5", "*.h5", "*.nc", "*.zarr", "*.pkl", "*.pickle", "*.joblib", "*.dill", "*.cloudpickle", "*.msgpack", "*.cbor", "*.bson", "*.ubjson", "*.smile", "*.ion", "*.xml", "*.xsd", "*.xsl", "*.xslt", "*.dtd", "*.rng", "*.rnc", "*.schematron", "*.wsdl", "*.wadl", "*.raml", "*.swagger", "*.openapi", "*.asyncapi", "*.postman", "*.insomnia", "*.har", "*.jmx", "*.gatling", "*.k6", "*.artillery", "*.wrk", "*.ab", "*.siege", "*.hey", "*.bombardier", "*.vegeta", "*.drill", "*.tsung", "*.locust", "*.jmeter", "*.neoload", "*.loadrunner", "*.webload", "*.loadui", "*.loadstorm", "*.loadimpact", "*.blazemeter", "*.loader", "*.loadster", "*.loadninja", "*.loadview", "*.loadfocus", "*.loadmill", "*.loadero", "*.loadcomplete", "*.loadtracer", "*.loadtester", "*.loadgen", "*.loadbot", "*.loadbalancer", "*.loadmonitor", "*.loadanalyzer", "*.loadoptimizer", "*.loadcontroller", "*.loadmanager", "*.loadscheduler", "*.loadexecutor", "*.loadrunner", "*.loaddriver", "*.loadengine", "*.loadframework", "*.loadplatform", "*.loadsuite", "*.loadtoolkit", "*.loadlibrary", "*.loadmodule", "*.loadplugin", "*.loadextension", "*.loadaddon", "*.loadcomponent", "*.loadservice", "*.loadmicroservice", "*.loadapi", "*.loadclient", "*.loadserver", "*.loadproxy", "*.loadgateway", "*.loadrouter", "*.loadswitch", "*.loadhub", "*.loadnode", "*.loadcluster", "*.loadcloud", "*.loadcontainer", "*.loadpod", "*.loadnamespace", "*.loaddeployment", "*.loadservice", "*.loadingress", "*.loadconfigmap", "*.loadsecret", "*.loadvolume", "*.loadpvc", "*.loadsc", "*.loadpv", "*.loadpdb", "*.loadhpa", "*.loadvpa", "*.loadcrd", "*.loadoperator", "*.loadhelm", "*.loadkustomize", "*.loadskaffold", "*.loadtilt", "*.loaddevspace", "*.loadgarden", "*.loadoctant", "*.loadlens", "*.loadk9s", "*.loadkubectl", "*.loadkubectx", "*.loadkubens", "*.loadkrew", "*.loadkustomize", "*.loadhelm", "*.loadflux", "*.loadargo", "*.loadtekton", "*.loadjenkins", "*.loadgitlab", "*.loadgithub", "*.loadbitbucket", "*.loadazure", "*.loadaws", "*.loadgcp", "*.loaddigitalocean", "*.loadlinode", "*.loadvultr", "*.loadhetzner", "*.loadovh", "*.loadscaleway", "*.loadupcloud", "*.loadexoscale", "*.loadcloudflare", "*.loadfastly", "*.loadkeycdn", "*.loadmaxcdn", "*.loadstackpath", "*.loadbunnyCDN", "*.loadgcore", "*.loadquic", "*.loadcloudfront", "*.loadazurecdn", "*.loadgooglecdn", "*.loadalibabacdn", "*.loadtencent", "*.loadbaidu", "*.loadyandex", "*.loadmail", "*.loadnaver", "*.loaddaum", "*.loadkakao", "*.loadline", "*.loadwechat", "*.loadwhatsapp", "*.loadtelegram", "*.loadviber", "*.loadskype", "*.loaddiscord", "*.loadslack", "*.loadteams", "*.loadzoom", "*.loadmeet", "*.loadwebex", "*.loadgotomeeting", "*.loadjoin", "*.loadbluejeans", "*.loaduberconference", "*.loadringcentral", "*.load8x8", "*.loadmitel", "*.loadavaya", "*.loadcisco", "*.loadpoly", "*.loadyealink", "*.loadgrandstream", "*.loadfanvil", "*.loadsnom", "*.loadhtek", "*.loadescene", "*.loadakuvox", "*.loaddoorbird", "*.load2n", "*.loadmobotix", "*.loadaxis", "*.loadhikvision", "*.loaddahua", "*.loadbosch", "*.loadpanasonic", "*.loadsony", "*.loadcanon", "*.loadnikon", "*.loadolympus", "*.loadfujifilm", "*.loadpentax", "*.loadricoh", "*.loadsigma", "*.loadtamron", "*.loadzeiss", "*.loadleica", "*.loadhasselblad", "*.loadmamiya", "*.loadphaseone", "*.loadcapture", "*.loadlightroom", "*.loadphotoshop", "*.loadgimp", "*.loadkrita", "*.loadblender", "*.loadmaya", "*.load3dsmax", "*.loadcinema4d", "*.loadhoudini", "*.loadnuke", "*.loadafter", "*.loadpremiere", "*.loadfinalcut", "*.loaddavinci", "*.loadavid", "*.loadedius", "*.loadvegas", "*.loadpinnacle", "*.loadcyberlink", "*.loadcorel", "*.loadadobe", "*.loadautodesk", "*.loadmaxon", "*.loadsidefx", "*.loadblackmagic", "*.loadapple", "*.loadmicrosoft", "*.loadgoogle", "*.loadamazon", "*.loadfacebook", "*.loadmeta", "*.loadtwitter", "*.loadlinkedin", "*.loadinstagram", "*.loadsnapchat", "*.loadtiktok", "*.loadyoutube", "*.loadvimeo", "*.loadtwitch", "*.loaddiscord", "*.loadreddit", "*.loadpinterest", "*.loadtumblr", "*.loadflickr", "*.load500px", "*.loadunsplash", "*.loadpexels", "*.loadpixabay", "*.loadshutterstock", "*.loadgetty", "*.loadalamy", "*.loadistock", "*.loadadobe", "*.loadcanva", "*.loadfigma", "*.loadsketch", "*.loadinvision", "*.loadmarvel", "*.loadprinciple", "*.loadframer", "*.loadprotopie", "*.loadflinto", "*.loadorigami", "*.loadform", "*.loadquartz", "*.loadpop", "*.loadhaiku", "*.loadlottie", "*.loadrive", "*.loadspline", "*.loadthree", "*.loadbabylon", "*.loadaframe", "*.loadreact", "*.loadangular", "*.loadvue", "*.loadsvelte", "*.loadember", "*.loadbackbone", "*.loadknockout", "*.loadpolymer", "*.loadlit", "*.loadstencil", "*.loadsolid", "*.loadpreact", "*.loadinferno", "*.loadmithril", "*.loadriot", "*.loadchoo", "*.loadhyperapp", "*.loadcycle", "*.loadmost", "*.loadxstream", "*.loadrxjs", "*.loadlodash", "*.loadramda", "*.loadimmutable", "*.loadmobx", "*.loadredux", "*.loadzustand", "*.loadjotai", "*.loadrecoil", "*.loadvaltio", "*.loadxstate", "*.loadrobot", "*.loadmachine", "*.loadstate", "*.loadstore", "*.loadcontext", "*.loadprovider", "*.loadconsumer", "*.loadhook", "*.loadeffect", "*.loadmemo", "*.loadcallback", "*.loadref", "*.loadimperative", "*.loadlayout", "*.loaddebug", "*.loadprofiler", "*.loadstrictmode", "*.loadsuspense", "*.loaderror", "*.loadboundary", "*.loadportal", "*.loadfragment", "*.loadcomponent", "*.loadelement", "*.loadnode", "*.loadfiber", "*.loadreconciler", "*.loadscheduler", "*.loadrenderer", "*.loadcommit", "*.loadupdate", "*.loadmount", "*.loadunmount", "*.loadlifecycle", "*.loadprops", "*.loadstate", "*.loadcontext", "*.loadchildren", "*.loadparent", "*.loadsibling", "*.loadancestor", "*.loaddescendant", "*.loadtree", "*.loadforest", "*.loadgraph", "*.loadnetwork", "*.loadmesh", "*.loadgrid", "*.loadlattice", "*.loadmatrix", "*.loadtensor", "*.loadvector", "*.loadscalar", "*.loadarray", "*.loadlist", "*.loadtuple", "*.loadset", "*.loadmap", "*.loaddict", "*.loadhash", "*.loadtable", "*.loadindex", "*.loadkey", "*.loadvalue", "*.loadpair", "*.loadentry", "*.loaditem", "*.loadelement", "*.loadmember", "*.loadfield", "*.loadproperty", "*.loadattribute", "*.loadmethod", "*.loadfunction", "*.loadprocedure", "*.loadroutine", "*.loadsubroutine", "*.loadmacro", "*.loadtemplate", "*.loadgeneric", "*.loadtype", "*.loadclass", "*.loadinterface", "*.loadtrait", "*.loadmixin", "*.loadmodule", "*.loadpackage", "*.loadnamespace", "*.loadscope", "*.loadcontext", "*.loadenvironment", "*.loadruntime", "*.loadplatform", "*.loadframework", "*.loadlibrary", "*.loadapi", "*.loadsdk", "*.loadtoolkit", "*.loadsuite", "*.loadbundle", "*.loadcollection", "*.loadarchive", "*.loadrepository", "*.loadregistry", "*.loadcatalog", "*.loaddirectory", "*.loadfolder", "*.loadfile", "*.loaddocument", "*.loadpage", "*.loadsheet", "*.loadworkbook", "*.loadspreadsheet", "*.loaddatabase", "*.loadtable", "*.loadview", "*.loadquery", "*.loadprocedure", "*.loadfunction", "*.loadtrigger", "*.loadindex", "*.loadconstraint", "*.loadschema", "*.loadmodel", "*.loadentity", "*.loadrelation", "*.loadassociation", "*.loadconnection", "*.loadlink", "*.loadjoin", "*.loadunion", "*.loadintersection", "*.loaddifference", "*.loadcartesian", "*.loadproduct", "*.loadsum", "*.loadaverage", "*.loadmean", "*.loadmedian", "*.loadmode", "*.loadrange", "*.loadvariance", "*.loaddeviation", "*.loadstandard", "*.loadnormal", "*.loaddistribution", "*.loadprobability", "*.loadstatistics", "*.loadanalytics", "*.loadmetrics", "*.loadkpi", "*.loadindicator", "*.loadmeasure", "*.loaddimension", "*.loadfact", "*.loadcube", "*.loadolap", "*.loadoltp", "*.loaddw", "*.loaddm", "*.loadetl", "*.loadelt", "*.loadpipeline", "*.loadworkflow", "*.loaddag", "*.loadjob", "*.loadtask", "*.loadstep", "*.loadstage", "*.loadphase", "*.loadepoch", "*.loaditeration", "*.loadbatch", "*.loadchunk", "*.loadblock", "*.loadpage", "*.loadsegment", "*.loadpartition", "*.loadshard", "*.loadreplica", "*.loadcluster", "*.loadnode", "*.loadpod", "*.loadcontainer", "*.loadservice", "*.loaddeployment", "*.loadstatefulset", "*.loaddaemonset", "*.loadjob", "*.loadcronjob", "*.loadconfigmap", "*.loadsecret", "*.loadvolume", "*.loadpvc", "*.loadsc", "*.loadpv", "*.loadpdb", "*.loadhpa", "*.loadvpa", "*.loadcrd", "*.loadoperator", "*.loadhelm", "*.loadkustomize", "*.loadskaffold", "*.loadtilt", "*.loaddevspace", "*.loadgarden", "*.loadoctant", "*.loadlens", "*.loadk9s", "*.loadkubectl", "*.loadkubectx", "*.loadkubens", "*.loadkrew", "*.loadkustomize", "*.loadhelm", "*.loadflux", "*.loadargo", "*.loadtekton", "*.loadjenkins", "*.loadgitlab", "*.loadgithub", "*.loadbitbucket", "*.loadazure", "*.loadaws", "*.loadgcp", "*.loaddigitalocean", "*.loadlinode", "*.loadvultr", "*.loadhetzner", "*.loadovh", "*.loadscaleway", "*.loadupcloud", "*.loadexoscale", "*.loadcloudflare", "*.loadfastly", "*.loadkeycdn", "*.loadmaxcdn", "*.loadstackpath", "*.loadbunnycdn", "*.loadgcore", "*.loadquic", "*.loadcloudfront", "*.loadazurecdn", "*.loadgooglecdn", "*.loadalibabacdn", "*.loadtencent", "*.loadbaidu", "*.loadyandex", "*.loadmail", "*.loadnaver", "*.loaddaum", "*.loadkakao", "*.loadline", "*.loadwechat", "*.loadwhatsapp", "*.loadtelegram", "*.loadviber", "*.loadskype", "*.loaddiscord", "*.loadslack", "*.loadteams", "*.loadzoom", "*.loadmeet", "*.loadwebex", "*.loadgotomeeting", "*.loadjoin", "*.loadbluejeans", "*.loaduberconference", "*.loadringcentral", "*.load8x8", "*.loadmitel", "*.loadavaya", "*.loadcisco", "*.loadpoly", "*.loadyealink", "*.loadgrandstream", "*.loadfanvil", "*.loadsnom", "*.loadhtek", "*.loadescene", "*.loadakuvox", "*.loaddoorbird", "*.load2n", "*.loadmobotix", "*.loadaxis", "*.loadhikvision", "*.loaddahua", "*.loadbosch", "*.loadpanasonic", "*.loadsony", "*.loadcanon", "*.loadnikon", "*.loadolympus", "*.loadfujifilm", "*.loadpentax", "*.loadricoh", "*.loadsigma", "*.loadtamron", "*.loadzeiss", "*.loadleica", "*.loadhasselblad", "*.loadmamiya", "*.loadphaseone", "*.loadcapture", "*.loadlightroom", "*.loadphotoshop", "*.loadgimp", "*.loadkrita", "*.loadblender", "*.loadmaya", "*.load3dsmax", "*.loadcinema4d", "*.loadhoudini", "*.loadnuke", "*.loadafter", "*.loadpremiere", "*.loadfinalcut", "*.loaddavinci", "*.loadavid", "*.loadedius", "*.loadvegas", "*.loadpinnacle", "*.loadcyberlink", "*.loadcorel", "*.loadpng", "*.loadjpg", "*.loadjpeg", "*.loadgif", "*.loadwebp", "*.loadavif", "*.loadheic", "*.loadheif", "*.loadtiff", "*.loadtif", "*.loadbmp", "*.loadico", "*.loadsvg", "*.loadeps", "*.loadpdf", "*.loadai", "*.loadpsd", "*.loadxcf", "*.loadkra", "*.loadora", "*.loadexr", "*.loadhdr", "*.loadtga", "*.loadpcx", "*.loadppm", "*.loadpgm", "*.loadpbm", "*.loadxpm", "*.loadxbm", "*.loadwbmp", "*.loadjbig", "*.loadjp2", "*.loadj2k", "*.loadjpc", "*.loadjpf", "*.loadjpx", "*.loadmj2", "*.loaddjvu", "*.loaddjv", "*.loadraw", "*.loadcr2", "*.loadcr3", "*.loadnef", "*.loadarf", "*.loadrw2", "*.loaddng", "*.loadorf", "*.loadraf", "*.loadsrf", "*.loadsr2", "*.loadx3f", "*.loadmrw", "*.loadpef", "*.loadptx", "*.loaddcr", "*.loadkdc", "*.loaderf", "*.loadmef", "*.loadmos", "*.loadnrw", "*.loadrwl", "*.loadsrw", "*.load3fr", "*.loadfff", "*.loadiiq", "*.loadrwz", "*.loadcap", "*.loadiiq", "*.loadtif", "*.loadtiff", "*.loadpsd", "*.loadpsb", "*.loadxcf", "*.loadkra", "*.loadora", "*.loadcpt", "*.loadpat", "*.loadabr", "*.loadasl", "*.loadatf", "*.loadgrd", "*.loadshd", "*.loadstl", "*.loadobj", "*.loadply", "*.loadoff", "*.load3ds", "*.loadmax", "*.loadblend", "*.loadfbx", "*.loaddae", "*.loadx3d", "*.loadwrl", "*.loadvrml", "*.loadgltf", "*.loadglb", "*.loadusd", "*.loadusda", "*.loadusdc", "*.loadusdz", "*.loadalembic", "*.loadabc", "*.loadopenvdb", "*.loadvdb", "*.loadnvdb", "*.loadpcl", "*.loadpcd", "*.loadpts", "*.loadxyz", "*.loadlas", "*.loadlaz", "*.loade57", "*.loadptx", "*.loadptz", "*.loadcsv", "*.loadtsv", "*.loadssv", "*.loadpsv", "*.loaddsv", "*.loadtxt", "*.loaddat", "*.loadlog", "*.loadout", "*.loaderr", "*.loadstdout", "*.loadstderr", "*.loadstdin", "*.loadpipe", "*.loadfifo", "*.loadsocket", "*.loadport", "*.loadhost", "*.loadurl", "*.loaduri", "*.loadurn", "*.loadlink", "*.loadhref", "*.loadsrc", "*.loadpath", "*.loadfile", "*.loaddir", "*.loadfolder", "*.loadroot", "*.loadhome", "*.loaduser", "*.loadgroup", "*.loadowner", "*.loadperm", "*.loadmode", "*.loadstat", "*.loadinfo", "*.loadmeta", "*.loadattr", "*.loadprop", "*.loadtag", "*.loadlabel", "*.loadname", "*.loadtitle", "*.loaddesc", "*.loadcomment", "*.loadnote", "*.loadremark", "*.loadannotation", "*.loaddocstring", "*.loadhelp", "*.loadusage", "*.loadexample", "*.loaddemo", "*.loadtest", "*.loadbench", "*.loadprof", "*.loadtrace", "*.loaddebug", "*.loadlog", "*.loadaudit", "*.loadmonitor", "*.loadwatch", "*.loadobserve", "*.loadtrack", "*.loadfollow", "*.loadtail", "*.loadstream", "*.loadfeed", "*.loadpub", "*.loadsub", "*.loadpush", "*.loadpull", "*.loadpoll", "*.loadfetch", "*.loadget", "*.loadpost", "*.loadput", "*.loadpatch", "*.loaddelete", "*.loadhead", "*.loadoptions", "*.loadtrace", "*.loadconnect", "*.loadupgrade", "*.loadwebsocket", "*.loadsse", "*.loadeventsource", "*.loadlongpoll", "*.loadcomet", "*.loadajax", "*.loadxhr", "*.loadfetch", "*.loadbeacon", "*.loadsendbeacon", "*.loadnavigator", "*.loadlocation", "*.loadhistory", "*.loadwindow", "*.loaddocument", "*.loadelement", "*.loadnode", "*.loadattr", "*.loadprop", "*.loadstyle", "*.loadclass", "*.loadid", "*.loadtag", "*.loadtype", "*.loadvalue", "*.loadcontent", "*.loadtext", "*.loadhtml", "*.loadxml", "*.loadjson", "*.loadyaml", "*.loadtoml", "*.loadini", "*.loadcfg", "*.loadconf", "*.loadconfig", "*.loadsettings", "*.loadoptions", "*.loadparams", "*.loadargs", "*.loadenv", "*.loadvar", "*.loadconst", "*.loaddefault", "*.loadfallback", "*.loadbackup", "*.loadcache", "*.loadtemp", "*.loadtmp", "*.loadswap", "*.loadlock", "*.loadpid", "*.loaduid", "*.loadgid", "*.loadsid", "*.loadtoken", "*.loadkey", "*.loadsecret", "*.loadpassword", "*.loadhash", "*.loadsalt", "*.loadnonce", "*.loadiv", "*.loadcipher", "*.loadencrypt", "*.loaddecrypt", "*.loadsign", "*.loadverify", "*.loadauth", "*.loadlogin", "*.loadlogout", "*.loadsession", "*.loadcookie", "*.loadheader", "*.loadbody", "*.loadpayload", "*.loaddata", "*.loadcontent", "*.loadmessage", "*.loadpacket", "*.loadframe", "*.loadchunk", "*.loadblock", "*.loadsegment", "*.loadfragment", "*.loadpart", "*.loadpiece", "*.loadslice", "*.loadrange", "*.loadspan", "*.loadinterval", "*.loadduration", "*.loadtimeout", "*.loaddelay", "*.loadwait", "*.loadsleep", "*.loadpause", "*.loadstop", "*.loadstart", "*.loadresume", "*.loadrestart", "*.loadreset", "*.loadclear", "*.loadflush", "*.loadsync", "*.loadasync", "*.loadawait", "*.loadpromise", "*.loadfuture", "*.loadtask", "*.loadjob", "*.loadwork", "*.loadworker", "*.loadthread", "*.loadprocess", "*.loadproc", "*.loadpid", "*.loadppid", "*.loadpgid", "*.loadsid", "*.loaduid", "*.loadgid", "*.loadeuid", "*.loadegid", "*.loadsuid", "*.loadsgid", "*.loadfsuid", "*.loadfsgid", "*.loadgroups", "*.loadcaps", "*.loadrlimit", "*.loadnice", "*.loadpriority", "*.loadscheduler", "*.loadpolicy", "*.loadaffinity", "*.loadcpu", "*.loadcore", "*.loadnuma", "*.loadmemory", "*.loadram", "*.loadswap", "*.loaddisk", "*.loadstorage", "*.loadvolume", "*.loadpartition", "*.loadfilesystem", "*.loadfs", "*.loadmount", "*.loadumount", "*.loadbind", "*.loadunbind", "*.loadlink", "*.loadunlink", "*.loadsymlink", "*.loadreadlink", "*.loadrealpath", "*.loadabspath", "*.loadrelpath", "*.loadbasename", "*.loaddirname", "*.loadextname", "*.loadstem", "*.loadsuffix", "*.loadprefix", "*.loadglob", "*.loadmatch", "*.loadsearch", "*.loadfind", "*.loadlocate", "*.loadwhich", "*.loadwhereis", "*.loadtype", "*.loadfile", "*.loadstat", "*.loadlstat", "*.loadfstat", "*.loadaccess", "*.loadexists", "*.loadisfile", "*.loadisdir", "*.loadislink", "*.loadismount", "*.loadisabs", "*.loadisrel", "*.loadisexec", "*.loadisread", "*.loadiswrite", "*.loadsize", "*.loadmtime", "*.loadctime", "*.loadatime", "*.loadbtime", "*.loadmode", "*.loadperm", "*.loadowner", "*.loadgroup", "*.loaduid", "*.loadgid", "*.loaddev", "*.loadino", "*.loadnlink", "*.loadblocks", "*.loadblksize", "*.loadrdev", "*.loadmajor", "*.loadminor", "*.loadopen", "*.loadclose", "*.loadread", "*.loadwrite", "*.loadseek", "*.loadtell", "*.loadflush", "*.loadsync", "*.loadtruncate", "*.loadlock", "*.loadunlock", "*.loadfcntl", "*.loadioctl", "*.loadselect", "*.loadpoll", "*.loadepoll", "*.loadkqueue", "*.loadevent", "*.loadfd", "*.loadsocket", "*.loadbind", "*.loadlisten", "*.loadaccept", "*.loadconnect", "*.loadsend", "*.loadrecv", "*.loadsendto", "*.loadrecvfrom", "*.loadsendmsg", "*.loadrecvmsg", "*.loadshutdown", "*.loadclose", "*.loadgetsockname", "*.loadgetpeername", "*.loadgetsockopt", "*.loadsetsockopt", "*.loadfcntl", "*.loadioctl", "*.loadselect", "*.loadpoll", "*.loadepoll", "*.loadkqueue", "*.loadevent", "*.loadpipe", "*.loadfifo", "*.loadmkfifo", "*.loadmknod", "*.loadmkdir", "*.loadrmdir", "*.loadremove", "*.loadunlink", "*.loadrename", "*.loadmove", "*.loadcopy", "*.loadcp", "*.loadmv", "*.loadrm", "*.loadln", "*.loadchmod", "*.loadchown", "*.loadchgrp", "*.loadtouch", "*.loadutime", "*.loadutimes", "*.loadfutimes", "*.loadlutimes", "*.loadstat", "*.loadlstat", "*.loadfstat", "*.loadfstatat", "*.loadaccess", "*.loadfaccessat", "*.loadreadlink", "*.loadreadlinkat", "*.loadsymlink", "*.loadsymlinkat", "*.loadlink", "*.loadlinkat", "*.loadunlink", "*.loadunlinkat", "*.loadrename", "*.loadrenameat", "*.loadmkdir", "*.loadmkdirat", "*.loadrmdir", "*.loadopenat", "*.loaddup", "*.loaddup2", "*.loaddup3", "*.loadpipe", "*.loadpipe2", "*.loadsocketpair", "*.loadfork", "*.loadvfork", "*.loadclone", "*.loadexec", "*.loadexecve", "*.loadexecvp", "*.loadexecvpe", "*.loadexecl", "*.loadexeclp", "*.loadexecle", "*.loadsystem", "*.loadpopen", "*.loadwait", "*.loadwaitpid", "*.loadwait3", "*.loadwait4", "*.loadwaitid", "*.loadexit", "*.load_exit", "*.loadabort", "*.loadkill", "*.loadraise", "*.loadsignal", "*.loadsigaction", "*.loadsigprocmask", "*.loadsigpending", "*.loadsigsuspend", "*.loadsigwait", "*.loadsigwaitinfo", "*.loadsigtimedwait", "*.loadpause", "*.loadalarm", "*.loadsetitimer", "*.loadgetitimer", "*.loadsleep", "*.loadusleep", "*.loadnanosleep", "*.loadclock_gettime", "*.loadclock_settime", "*.loadclock_getres", "*.loadclock_nanosleep", "*.loadtimer_create", "*.loadtimer_delete", "*.loadtimer_settime", "*.loadtimer_gettime", "*.loadtimer_getoverrun", "*.loadgetpid", "*.loadgetppid", "*.loadgetpgrp", "*.loadgetpgid", "*.loadsetpgid", "*.loadgetsid", "*.loadsetsid", "*.loadgetuid", "*.loadgeteuid", "*.loadgetgid", "*.loadgetegid", "*.loadsetuid", "*.loadseteuid", "*.loadsetgid", "*.loadsetegid", "*.loadsetreuid", "*.loadsetregid", "*.loadsetresuid", "*.loadsetresgid", "*.loadgetresuid", "*.loadgetresgid", "*.loadgetgroups", "*.loadsetgroups", "*.loadinitgroups", "*.loadgetlogin", "*.loadgetlogin_r", "*.loadcuserid", "*.loadgetpwnam", "*.loadgetpwuid", "*.loadgetpwent", "*.loadsetpwent", "*.loadendpwent", "*.loadgetgrnam", "*.loadgetgrgid", "*.loadgetgrent", "*.loadsetgrent", "*.loadendgrent", "*.loadgetspnam", "*.loadgetspent", "*.loadsetspent", "*.loadendspent", "*.loadcrypt", "*.loadencrypt", "*.loadsetkey", "*.loadgetpass", "*.loadttyname", "*.loadttyname_r", "*.loadisatty", "*.loadttyslot", "*.loadctermid", "*.loadcuserid", "*.loadgetenv", "*.loadputenv", "*.loadsetenv", "*.loadunsetenv", "*.loadclearenv", "*.loadmktemp", "*.loadmkstemp", "*.loadmkdtemp", "*.loadtmpnam", "*.loadtmpnam_r", "*.loadtempnam", "*.loadmktemp", "*.loadmkstemp", "*.loadmkostemp", "*.loadmkstemps", "*.loadmkostemps", "*.loadmkdtemp", "*.loadgetcwd", "*.loadget_current_dir_name", "*.loadgetwd", "*.loadchdir", "*.loadfchdir", "*.loadgetdtablesize", "*.loaddup", "*.loaddup2", "*.loaddup3", "*.loadclose", "*.loadread", "*.loadwrite", "*.loadpread", "*.loadpwrite", "*.loadlseek", "*.loadfsync", "*.loadfdatasync", "*.loadtruncate", "*.loadftruncate", "*.loadaccess", "*.loadfaccessat", "*.loadchown", "*.loadfchown", "*.loadlchown", "*.loadfchownat", "*.loadchdir", "*.loadfchdir", "*.loadgetcwd", "*.loadpathconf", "*.loadfpathconf", "*.loadsysconf", "*.loadconfstr", "*.loadgetpid", "*.loadgetppid", "*.loadgetpgrp", "*.loadgetpgid", "*.loadsetpgid", "*.loadsetsid", "*.loadgetsid", "*.loadgetuid", "*.loadgeteuid", "*.loadgetgid", "*.loadgetegid", "*.loadsetuid", "*.loadseteuid", "*.loadsetgid", "*.loadsetegid", "*.loadsetreuid", "*.loadsetregid", "*.loadgetgroups", "*.loadsetgroups", "*.loadinitgroups", "*.loadfork", "*.loadvfork", "*.loadexecve", "*.loadfexecve", "*.loadexecv", "*.loadexecvp", "*.loadexecvpe", "*.loadexecl", "*.loadexeclp", "*.loadexecle", "*.load_exit", "*.loadexit", "*.loadwait", "*.loadwaitpid", "*.loadwaitid", "*.loadsystem", "*.loadalarm", "*.loadpause", "*.loadsleep", "*.loadusleep", "*.loadgethostname", "*.loadsethostname", "*.loadgetdomainname", "*.loadsetdomainname", "*.loadvhangup", "*.loadrevoke", "*.loadacct", "*.loaddaemon", "*.loadchroot", "*.loadgetpass", "*.loadgetlogin", "*.loadgetlogin_r", "*.loadgethostid", "*.loadsethostid", "*.loadnice", "*.loadsync", "*.loadswab", "*.loadcrypt", "*.loadencrypt", "*.loadsetkey", "*.loadgetpagesize", "*.loadgetdtablesize", "*.loadbrk", "*.loadsbrk", "*.loadsyscall", "*.loadlockf", "*.loadgai_strerror", "*.loadgetaddrinfo", "*.loadfreeaddrinfo", "*.loadgetnameinfo", "*.loadinet_addr", "*.loadinet_network", "*.loadinet_ntoa", "*.loadinet_makeaddr", "*.loadinet_lnaof", "*.loadinet_netof", "*.loadinet_aton", "*.loadinet_ntop", "*.loadinet_pton", "*.loadgethostbyname", "*.loadgethostbyaddr", "*.loadgethostent", "*.loadsethostent", "*.loadendhostent", "*.loadherror", "*.loadhstrerror", "*.loadgetnetbyname", "*.loadgetnetbyaddr", "*.loadgetnetent", "*.loadsetnetent", "*.loadendnetent", "*.loadgetprotobyname", "*.loadgetprotobynumber", "*.loadgetprotoent", "*.loadsetprotoent", "*.loadendprotoent", "*.loadgetservbyname", "*.loadgetservbyport", "*.loadgetservent", "*.loadsetservent", "*.loadendservent", "*.loadgetnetgrent", "*.loadsetnetgrent", "*.loadendnetgrent", "*.loadinnetgr", "*.loadrcmd", "*.loadrexec", "*.loadruserok", "*.loadiruserok", "*.loadrresvport", "*.loadrresvport_af", "*.loadsocket", "*.loadsocketpair", "*.loadbind", "*.loadgetsockname", "*.loadconnect", "*.loadgetpeername", "*.loadsend", "*.loadrecv", "*.loadsendto", "*.loadrecvfrom", "*.loadsendmsg", "*.loadrecvmsg", "*.loadgetsockopt", "*.loadsetsockopt", "*.loadlisten", "*.loadaccept", "*.loadaccept4", "*.loadshutdown", "*.loadsockatmark", "*.loadisfdtype", "*.loadif_nametoindex", "*.loadif_indextoname", "*.loadif_nameindex", "*.loadif_freenameindex", "*.loadselect", "*.loadpselect", "*.loadpoll", "*.loadppoll", "*.loadepoll_create", "*.loadepoll_create1", "*.loadepoll_ctl", "*.loadepoll_wait", "*.loadepoll_pwait", "*.loadkqueue", "*.loadkevent", "*.loadmmap", "*.loadmunmap", "*.loadmprotect", "*.loadmsync", "*.loadmlock", "*.loadmunlock", "*.loadmlockall", "*.loadmunlockall", "*.loadmadvise", "*.loadmincore", "*.loadremap_file_pages", "*.loadshm_open", "*.loadshm_unlink", "*.loadshmget", "*.loadshmat", "*.loadshmdt", "*.loadshmctl", "*.loadsemget", "*.loadsemop", "*.loadsemtimedop", "*.loadsemctl", "*.loadmsgget", "*.loadmsgsnd", "*.loadmsgrcv", "*.loadmsgctl", "*.loadftok", "*.loadmq_open", "*.loadmq_close", "*.loadmq_unlink", "*.loadmq_send", "*.loadmq_timedsend", "*.loadmq_receive", "*.loadmq_timedreceive", "*.loadmq_notify", "*.loadmq_getattr", "*.loadmq_setattr", "*.loadaio_read", "*.loadaio_write", "*.loadaio_fsync", "*.loadaio_error", "*.loadaio_return", "*.loadaio_suspend", "*.loadaio_cancel", "*.loadlio_listio", "*.loadaio_init", "*.loadpthread_create", "*.loadpthread_exit", "*.loadpthread_join", "*.loadpthread_detach", "*.loadpthread_self", "*.loadpthread_equal", "*.loadpthread_attr_init", "*.loadpthread_attr_destroy", "*.loadpthread_attr_getdetachstate", "*.loadpthread_attr_setdetachstate", "*.loadpthread_attr_getstackaddr", "*.loadpthread_attr_setstackaddr", "*.loadpthread_attr_getstacksize", "*.loadpthread_attr_setstacksize", "*.loadpthread_attr_getstack", "*.loadpthread_attr_setstack", "*.loadpthread_attr_getguardsize", "*.loadpthread_attr_setguardsize", "*.loadpthread_attr_getschedparam", "*.loadpthread_attr_setschedparam", "*.loadpthread_attr_getschedpolicy", "*.loadpthread_attr_setschedpolicy", "*.loadpthread_attr_getinheritsched", "*.loadpthread_attr_setinheritsched", "*.loadpthread_attr_getscope", "*.loadpthread_attr_setscope", "*.loadpthread_getschedparam", "*.loadpthread_setschedparam", "*.loadpthread_setschedprio", "*.loadpthread_getschedpolicy", "*.loadpthread_setschedpolicy", "*.loadpthread_getconcurrency", "*.loadpthread_setconcurrency", "*.loadpthread_yield", "*.loadsched_yield", "*.loadpthread_setaffinity_np", "*.loadpthread_getaffinity_np", "*.loadpthread_setname_np", "*.loadpthread_getname_np", "*.loadpthread_once", "*.loadpthread_mutex_init", "*.loadpthread_mutex_destroy", "*.loadpthread_mutex_trylock", "*.loadpthread_mutex_lock", "*.loadpthread_mutex_timedlock", "*.loadpthread_mutex_unlock", "*.loadpthread_mutex_getprioceiling", "*.loadpthread_mutex_setprioceiling", "*.loadpthread_mutex_consistent", "*.loadpthread_mutexattr_init", "*.loadpthread_mutexattr_destroy", "*.loadpthread_mutexattr_getpshared", "*.loadpthread_mutexattr_setpshared", "*.loadpthread_mutexattr_gettype", "*.loadpthread_mutexattr_settype", "*.loadpthread_mutexattr_getprotocol", "*.loadpthread_mutexattr_setprotocol", "*.loadpthread_mutexattr_getprioceiling", "*.loadpthread_mutexattr_setprioceiling", "*.loadpthread_mutexattr_getrobust", "*.loadpthread_mutexattr_setrobust", "*.loadpthread_rwlock_init", "*.loadpthread_rwlock_destroy", "*.loadpthread_rwlock_rdlock", "*.loadpthread_rwlock_tryrdlock", "*.loadpthread_rwlock_timedrdlock", "*.loadpthread_rwlock_wrlock", "*.loadpthread_rwlock_trywrlock", "*.loadpthread_rwlock_timedwrlock", "*.loadpthread_rwlock_unlock", "*.loadpthread_rwlockattr_init", "*.loadpthread_rwlockattr_destroy", "*.loadpthread_rwlockattr_getpshared", "*.loadpthread_rwlockattr_setpshared", "*.loadpthread_rwlockattr_getkind_np", "*.loadpthread_rwlockattr_setkind_np", "*.loadpthread_cond_init", "*.loadpthread_cond_destroy", "*.loadpthread_cond_signal", "*.loadpthread_cond_broadcast", "*.loadpthread_cond_wait", "*.loadpthread_cond_timedwait", "*.loadpthread_condattr_init", "*.loadpthread_condattr_destroy", "*.loadpthread_condattr_getpshared", "*.loadpthread_condattr_setpshared", "*.loadpthread_condattr_getclock", "*.loadpthread_condattr_setclock", "*.loadpthread_spin_init", "*.loadpthread_spin_destroy", "*.loadpthread_spin_lock", "*.loadpthread_spin_trylock", "*.loadpthread_spin_unlock", "*.loadpthread_barrier_init", "*.loadpthread_barrier_destroy", "*.loadpthread_barrier_wait", "*.loadpthread_barrierattr_init", "*.loadpthread_barrierattr_destroy", "*.loadpthread_barrierattr_getpshared", "*.loadpthread_barrierattr_setpshared", "*.loadpthread_key_create", "*.loadpthread_key_delete", "*.loadpthread_getspecific", "*.loadpthread_setspecific", "*.loadpthread_getcpuclockid", "*.loadpthread_atfork", "*.loadpthread_kill", "*.loadpthread_sigqueue", "*.loadpthread_sigmask", "*.loadsigwait", "*.loadsigwaitinfo", "*.loadsigtimedwait", "*.loadpthread_cleanup_push", "*.loadpthread_cleanup_pop", "*.loadpthread_cancel", "*.loadpthread_setcancelstate", "*.loadpthread_setcanceltype", "*.loadpthread_testcancel", "*.loadflockfile", "*.loadftrylockfile", "*.loadfunlockfile", "*.loadgetc_unlocked", "*.loadgetchar_unlocked", "*.loadputc_unlocked", "*.loadputchar_unlocked", "*.loadgetdelim", "*.loadgetline", "*.loadfopencookie", "*.loadfmemopen", "*.loadopen_memstream", "*.loadopen_wmemstream", "*.loadprintf", "*.loadfprintf", "*.loadsprintf", "*.loadsnprintf", "*.loadvprintf", "*.loadvfprintf", "*.loadvsprintf", "*.loadvsnprintf", "*.loaddprintf", "*.loadvdprintf", "*.loadasprintf", "*.loadvasprintf", "*.loadscanf", "*.loadfscanf", "*.loadsscanf", "*.loadvscanf", "*.loadvfscanf", "*.loadvsscanf", "*.loadfgetc", "*.loadgetc", "*.loadgetchar", "*.loadfgetc_unlocked", "*.loadgetc_unlocked", "*.loadgetchar_unlocked", "*.loadfputc", "*.loadputc", "*.loadputchar", "*.loadfputc_unlocked", "*.loadputc_unlocked", "*.loadputchar_unlocked", "*.loadgetw", "*.loadputw", "*.loadfgets", "*.loadgets", "*.loadfgets_unlocked", "*.loadfputs", "*.loadputs", "*.loadfputs_unlocked", "*.loadungetc", "*.loadfread", "*.loadfwrite", "*.loadfread_unlocked", "*.loadfwrite_unlocked", "*.loadfseek", "*.loadftell", "*.loadrewind", "*.loadfgetpos", "*.loadfsetpos", "*.loadfseeko", "*.loadftello", "*.loadfflush", "*.loadfflush_unlocked", "*.loadfpurge", "*.loadfeof", "*.loadferror", "*.loadclearerr", "*.loadfeof_unlocked", "*.loadferror_unlocked", "*.loadclearerr_unlocked", "*.loadfileno", "*.loadfileno_unlocked", "*.loadpopen", "*.loadpclose", "*.loadctermid", "*.loadcuserid", "*.loadobstack_printf", "*.loadobstack_vprintf", "*.load__fbufsize", "*.load__flbf", "*.load__fpending", "*.load__fpurge", "*.load__freadable", "*.load__freading", "*.load__fsetlocking", "*.load__fwritable", "*.load__fwriting", "*.load_flushlbf", "*.loadfpathconf", "*.loadmalloc", "*.loadcalloc", "*.loadrealloc", "*.loadfree", "*.loadcfree", "*.loadmemalign", "*.loadvalloc", "*.loadpvalloc", "*.loadmallinfo", "*.loadmallopt", "*.loadmcheck", "*.loadmprobe", "*.loadmtrace", "*.loadmuntrace", "*.loadobstack_init", "*.loadobstack_alloc", "*.loadobstack_copy", "*.loadobstack_copy0", "*.loadobstack_free", "*.loadobstack_blank", "*.loadobstack_grow", "*.loadobstack_grow0", "*.loadobstack_1grow", "*.loadobstack_ptr_grow", "*.loadobstack_int_grow", "*.loadobstack_finish", "*.loadobstack_object_size", "*.loadobstack_room", "*.loadobstack_make_room", "*.loadobstack_1grow_fast", "*.loadobstack_ptr_grow_fast", "*.loadobstack_int_grow_fast", "*.loadobstack_blank_fast", "*.loadobstack_memory_used", "*.loadalloca", "*.load__builtin_alloca", "*.loadatexit", "*.loadon_exit", "*.load__cxa_atexit", "*.loadexit", "*.loadquick_exit", "*.load_Exit", "*.loadabort", "*.loadsystem", "*.loadgetenv", "*.loadsecure_getenv", "*.load__secure_getenv", "*.loadputenv", "*.loadsetenv", "*.loadunsetenv", "*.loadclearenv", "*.loadmktemp", "*.loadmkstemp", "*.loadmkostemp", "*.loadmkstemps", "*.loadmkostemps", "*.loadmkdtemp", "*.loadrealpath", "*.loadcanonical_file_name", "*.loada64l", "*.loadl64a", "*.loaddrand48", "*.loaderand48", "*.loadlrand48", "*.loadnrand48", "*.loadmrand48", "*.loadjrand48", "*.loadsrand48", "*.loadseed48", "*.loadlcong48", "*.loadrand", "*.loadsrand", "*.loadrand_r", "*.loadsrand_r", "*.loadrandom", "*.loadsrandom", "*.loadinitstate", "*.loadsetstate", "*.loadrandom_r", "*.loadsrandom_r", "*.loadinitstate_r", "*.loadsetstate_r", "*.loadstrtol", "*.loadstrtoul", "*.loadstrtoq", "*.loadstrtouq", "*.loadstrtoll", "*.loadstrtoull", "*.loadstrtof", "*.loadstrtod", "*.loadstrtold", "*.loadstrtol_l", "*.loadstrtoul_l", "*.loadstrtoll_l", "*.loadstrtoull_l", "*.loadstrtof_l", "*.loadstrtod_l", "*.loadstrtold_l", "*.loadatof", "*.loadatoi", "*.loadatol", "*.loadatoll", "*.loadabs", "*.loadlabs", "*.loadllabs", "*.loadimaxabs", "*.loaddiv", "*.loadldiv", "*.loadlldiv", "*.loadimaxdiv", "*.loadmblen", "*.loadmbtowc", "*.loadwctomb", "*.loadmbstowcs", "*.loadwcstombs", "*.loadrpmatch", "*.loadgetsubopt", "*.loadgetloadavg", "*.loadmemcpy", "*.loadmemmove", "*.loadmemccpy", "*.loadmemset", "*.loadmemcmp", "*.loadmemchr", "*.loadrawmemchr", "*.loadmemrchr", "*.loadstrcpy", "*.loadstrncpy", "*.loadstrcat", "*.loadstrncat", "*.loadstrcmp", "*.loadstrncmp", "*.loadstrcoll", "*.loadstrxfrm", "*.loadstrcoll_l", "*.loadstrxfrm_l", "*.loadstrdup", "*.loadstrndup", "*.loadstrchr", "*.loadstrrchr", "*.loadstrchrnul", "*.loadstrstr", "*.loadstrcasestr", "*.loadmemmem", "*.load__builtin_strstr", "*.load__builtin_strchr", "*.load__builtin_strrchr", "*.load__builtin_strpbrk", "*.load__builtin_strspn", "*.load__builtin_strcspn", "*.loadstrspn", "*.loadstrcspn", "*.loadstrpbrk", "*.loadstrtok", "*.loadstrtok_r", "*.load__strtok_r", "*.loadstrlen", "*.loadstrnlen", "*.loaderror", "*.loadstrerror", "*.loadstrerror_r", "*.load__xpg_strerror_r", "*.loadstrsignal", "*.loadpsignal", "*.loadpsiginfo", "*.loadstrsep", "*.loadstrfry", "*.loadmemfrob", "*.loadbasename", "*.loaddirname", "*.loadindex", "*.loadrindex", "*.loadffs", "*.loadffsl", "*.loadffsll", "*.loadstrcasecmp", "*.loadstrncasecmp", "*.loadstrcasecmp_l", "*.loadstrncasecmp_l", "*.loadstpcpy", "*.loadstpncpy", "*.load__builtin_stpcpy", "*.load__builtin_stpncpy", "*.loadstrverscmp", "*.loadstrfmon", "*.loadstrfmon_l", "*.loadstrftime", "*.loadstrftime_l", "*.loadstrptime", "*.loadstrptime_l", "*.loadgmtime", "*.loadlocaltime", "*.loadmktime", "*.loadtimegm", "*.loadtimelocal", "*.loaddysize", "*.loadtzset", "*.loadtzname", "*.loadtimezone", "*.loaddaylight", "*.loadgetdate", "*.loadgetdate_r", "*.loadasctime", "*.loadctime", "*.loadasctime_r", "*.loadctime_r", "*.loadgmtime_r", "*.loadlocaltime_r", "*.loaddifftime", "*.loadclock", "*.loadtimes", "*.loadclock_getcpuclockid", "*.loadclock_getres", "*.loadclock_gettime", "*.loadclock_settime", "*.loadclock_nanosleep", "*.loadtimer_create", "*.loadtimer_delete", "*.loadtimer_settime", "*.loadtimer_gettime", "*.loadtimer_getoverrun", "*.loadgetitimer", "*.loadsetitimer", "*.loadalarm", "*.loadsleep", "*.loadusleep", "*.loadnanosleep", "*.loadgetrusage", "*.loadgetrlimit", "*.loadgetrlimit64", "*.loadsetrlimit", "*.loadsetrlimit64", "*.loadgetpriority", "*.loadsetpriority", "*.loadnice", "*.loadgetdtablesize", "*.loadgetpagesize", "*.loadsysconf", "*.loadconfstr", "*.loadpathconf", "*.loadfpathconf", "*.loadglob", "*.loadglobfree", "*.loadglob64", "*.loadglobfree64", "*.loadfnmatch", "*.loadregcomp", "*.loadregexec", "*.loadregerror", "*.loadregfree", "*.loadwordexp", "*.loadwordfree", "*.loadpopen", "*.loadpclose", "*.loadwprintf", "*.loadfwprintf", "*.loadswprintf", "*.loadvwprintf", "*.loadvfwprintf", "*.loadvswprintf", "*.loadwscanf", "*.loadfwscanf", "*.loadswscanf", "*.loadvwscanf", "*.loadvfwscanf", "*.loadvswscanf", "*.loadfgetwc", "*.loadgetwc", "*.loadgetwchar", "*.loadfputwc", "*.loadputwc", "*.loadputwchar", "*.loadfgetws", "*.loadfputws", "*.loadungetwc", "*.loadwcslen", "*.loadwcsnlen", "*.loadwcscpy", "*.loadwcsncpy", "*.loadwcscat", "*.loadwcsncat", "*.loadwcscmp", "*.loadwcsncmp", "*.loadwcscasecmp", "*.loadwcsncasecmp", "*.loadwcscasecmp_l", "*.loadwcsncasecmp_l", "*.loadwcscoll", "*.loadwcsxfrm", "*.loadwcscoll_l", "*.loadwcsxfrm_l", "*.loadwcsdup", "*.loadwcschr", "*.loadwcsrchr", "*.loadwcsstr", "*.loadwcsspn", "*.loadwcscspn", "*.loadwcspbrk", "*.loadwcstok", "*.loadwcswidth", "*.loadwcwidth", "*.loadwmemcpy", "*.loadwmemmove", "*.loadwmemset", "*.loadwmemcmp", "*.loadwmemchr", "*.loadwcstol", "*.loadwcstoul", "*.loadwcstoll", "*.loadwcstoull", "*.loadwcstof", "*.loadwcstod", "*.loadwcstold", "*.loadwcstol_l", "*.loadwcstoul_l", "*.loadwcstoll_l", "*.loadwcstoull_l", "*.loadwcstof_l", "*.loadwcstod_l", "*.loadwcstold_l", "*.loadwcstombs", "*.loadmbstowcs", "*.loadwctomb", "*.loadmbtowc", "*.loadmbsinit", "*.loadmbrlen", "*.loadmbrtowc", "*.loadwcrtomb", "*.loadmbsrtowcs", "*.loadwcsrtombs", "*.loadmbsnrtowcs", "*.loadwcsnrtombs", "*.loadwcsftime", "*.loadwcsftime_l", "*.loadiswspace", "*.loadiswalnum", "*.loadiswalpha", "*.loadiswblank", "*.loadiswcntrl", "*.loadiswdigit", "*.loadiswgraph", "*.loadiswlower", "*.loadiswprint", "*.loadiswpunct", "*.loadiswupper", "*.loadiswxdigit", "*.loadiswctype", "*.loadwctype", "*.loadtowlower", "*.loadtowupper", "*.loadtowctrans", "*.loadwctrans", "*.loadiswspace_l", "*.loadiswalnum_l", "*.loadiswalpha_l", "*.loadiswblank_l", "*.loadiswcntrl_l", "*.loadiswdigit_l", "*.loadiswgraph_l", "*.loadiswlower_l", "*.loadiswprint_l", "*.loadiswpunct_l", "*.loadiswupper_l", "*.loadiswxdigit_l", "*.loadiswctype_l", "*.loadwctype_l", "*.loadtowlower_l", "*.loadtowupper_l", "*.loadtowctrans_l", "*.loadwctrans_l", "*.loadisspace", "*.loadisalnum", "*.loadisalpha", "*.loadisblank", "*.loadiscntrl", "*.loadisdigit", "*.loadisgraph", "*.loadislower", "*.loadisprint", "*.loadispunct", "*.loadisupper", "*.loadisxdigit", "*.loadisascii", "*.loadtoascii", "*.load_tolower", "*.load_toupper", "*.loadtolower", "*.loadtoupper", "*.loadisspace_l", "*.loadisalnum_l", "*.loadisalpha_l", "*.loadisblank_l", "*.loadiscntrl_l", "*.loadisdigit_l", "*.loadisgraph_l", "*.loadislower_l", "*.loadisprint_l", "*.loadispunct_l", "*.loadisupper_l", "*.loadisxdigit_l", "*.loadtolower_l", "*.loadtoupper_l", "*.loadnewlocale", "*.loadduplocale", "*.loadfreelocale", "*.loaduselocale", "*.loadsetlocale", "*.loadlocaleconv", "*.loadnl_langinfo", "*.loadnl_langinfo_l", "*.loadbindtextdomain", "*.loadtextdomain", "*.loadgettext", "*.loaddgettext", "*.loaddcgettext", "*.loadngettext", "*.loaddngettext", "*.loaddcngettext", "*.loadbind_textdomain_codeset", "*.loadgetopt", "*.loadgetopt_long", "*.loadgetopt_long_only", "*.loadoptarg", "*.loadoptind", "*.loadopterr", "*.loadoptopt", "*.loadargz_add", "*.loadargz_add_sep", "*.loadargz_append", "*.loadargz_count", "*.loadargz_create", "*.loadargz_create_sep", "*.loadargz_delete", "*.loadargz_extract", "*.loadargz_insert", "*.loadargz_next", "*.loadargz_replace", "*.loadargz_stringify", "*.loadenvz_add", "*.loadenvz_entry", "*.loadenvz_get", "*.loadenvz_merge", "*.loadenvz_remove", "*.loadenvz_strip", "*.loadsuboption", "*.loadgetsubopt", "*.loadmcheck", "*.loadmcheck_check_all", "*.loadmcheck_pedantic", "*.loadmprobe", "*.loadmtrace", "*.loadmuntrace", "*.loadmallinfo", "*.loadmallinfo2", "*.loadmallopt", "*.loadmalloc_stats", "*.loadmalloc_info", "*.loadmalloc_get_state", "*.loadmalloc_set_state", "*.loadmalloc_trim", "*.loadmalloc_usable_size", "*.loadmalloc_hook", "*.loadrealloc_hook", "*.loadmemalign_hook", "*.loadfree_hook", "*.load__after_morecore_hook", "*.load__malloc_initialize_hook", "*.load__free_hook", "*.load__malloc_hook", "*.load__realloc_hook", "*.load__memalign_hook", "*.loadobstack_alloc_failed_handler", "*.loadobstack_exit_failure", "*.loadprogram_invocation_name", "*.loadprogram_invocation_short_name", "*.load__progname", "*.load__progname_full", "*.loadargp_parse", "*.loadargp_usage", "*.loadargp_help", "*.loadargp_state_help", "*.loadargp_error", "*.loadargp_failure", "*.loaderror", "*.loaderror_at_line", "*.loadwarn", "*.loadwarnx", "*.loadvwarn", "*.loadvwarnx", "*.loaderr", "*.loaderrx", "*.loadverr", "*.loadverrx", "*.loadprogram_invocation_name", "*.loadprogram_invocation_short_name", "*.loadgetprogname", "*.loadsetprogname", "*.loadgnu_get_libc_version", "*.loadgnu_get_libc_release", "*.load__libc_start_main", "*.load__cxa_atexit", "*.load__cxa_finalize", "*.load__assert_fail", "*.load__assert_perror_fail", "*.load__fpu_control", "*.load_fpu_getcw", "*.load_fpu_setcw", "*.loadfegetenv", "*.loadfeholdexcept", "*.loadfesetenv", "*.loadfeupdateenv", "*.loadfegetround", "*.loadfesetround", "*.loadfegetexceptflag", "*.loadfesetexceptflag", "*.loadfeclearexcept", "*.loadferaiseexcept", "*.loadfetestexcept", "*.loadfeenableexcept", "*.loadfedisableexcept", "*.loadfegetexcept", "*.loadacos", "*.loadasin", "*.loadatan", "*.loadatan2", "*.loadcos", "*.loadsin", "*.loadtan", "*.loadacosh", "*.loadasinh", "*.loadatanh", "*.loadcosh", "*.loadsinh", "*.loadtanh", "*.loadexp", "*.loadexp10", "*.loadexp2", "*.loadexpm1", "*.loadfrexp", "*.loadilogb", "*.loadldexp", "*.loadlog", "*.loadlog10", "*.loadlog1p", "*.loadlog2", "*.loadlogb", "*.loadmodf", "*.loadscalb", "*.loadscalbln", "*.loadscalbn", "*.loadcbrt", "*.loadfabs", "*.loadhypot", "*.loadpow", "*.loadsqrt", "*.loaderf", "*.loaderfc", "*.loadgamma", "*.loadlgamma", "*.loadtgamma", "*.loadceil", "*.loadfloor", "*.loadnearbyint", "*.loadrint", "*.loadlrint", "*.loadllrint", "*.loadround", "*.loadlround", "*.loadllround", "*.loadtrunc", "*.loadremquo", "*.loadcopysign", "*.loadnan", "*.loadnextafter", "*.loadnexttoward", "*.loadfdim", "*.loadfmax", "*.loadfmin", "*.loadfma", "*.loadacosf", "*.loadasinf", "*.loadatanf", "*.loadatan2f", "*.loadcosf", "*.loadsinf", "*.loadtanf", "*.loadacoshf", "*.loadasinhf", "*.loadatanhf", "*.loadcoshf", "*.loadsinhf", "*.loadtanhf", "*.loadexpf", "*.loadexp10f", "*.loadexp2f", "*.loadexpm1f", "*.loadfrexpf", "*.loadilogbf", "*.loadldexpf", "*.loadlogf", "*.loadlog10f", "*.loadlog1pf", "*.loadlog2f", "*.loadlogbf", "*.loadmodff", "*.loadscalbf", "*.loadscalblnf", "*.loadscalbnf", "*.loadcbrtf", "*.loadfabsf", "*.loadhypotf", "*.loadpowf", "*.loadsqrtf", "*.loaderff", "*.loaderfcf", "*.loadgammaf", "*.loadlgammaf", "*.loadtgammaf", "*.loadceilf", "*.loadfloorf", "*.loadnearbyintf", "*.loadrintf", "*.loadlrintf", "*.loadllrintf", "*.loadroundf", "*.loadlroundf", "*.loadllroundf", "*.loadtruncf", "*.loadremquof", "*.loadcopysignf", "*.loadnanf", "*.loadnextafterf", "*.loadnexttowardf", "*.loadfdimf", "*.loadfmaxf", "*.loadfminf", "*.loadfmaf", "*.loadacosl", "*.loadasinl", "*.loadatanl", "*.loadatan2l", "*.loadcosl", "*.loadsinl", "*.loadtanl", "*.loadacoshl", "*.loadasinhl", "*.loadatanhl", "*.loadcoshl", "*.loadsinhl", "*.loadtanhl", "*.loadexpl", "*.loadexp10l", "*.loadexp2l", "*.loadexpm1l", "*.loadfrexpl", "*.loadilogbl", "*.loadldexpl", "*.loadlogl", "*.loadlog10l", "*.loadlog1pl", "*.loadlog2l", "*.loadlogbl", "*.loadmodfl", "*.loadscalbl", "*.loadscalblnl", "*.loadscalbnl", "*.loadcbrtl", "*.loadfabsl", "*.loadhypotl", "*.loadpowl", "*.loadsqrtl", "*.loaderfl", "*.loaderfcl", "*.loadgammal", "*.loadlgammal", "*.loadtgammal", "*.loadceill", "*.loadfloorl", "*.loadnearbyintl", "*.loadrintl", "*.loadlrintl", "*.loadllrintl", "*.loadroundl", "*.loadlroundl", "*.loadllroundl", "*.loadtruncl", "*.loadremquol", "*.loadcopysignl", "*.loadnanl", "*.loadnextafterl", "*.loadnexttowardl", "*.loadfdiml", "*.loadfmaxl", "*.loadfminl", "*.loadfmal", "*.loadcabs", "*.loadcabsf", "*.loadcabsl", "*.loadcacos", "*.loadcacosf", "*.loadcacosl", "*.loadcacosh", "*.loadcacoshf", "*.loadcacoshl", "*.loadcarg", "*.loadcargf", "*.loadcargl", "*.loadcasin", "*.loadcasinf", "*.loadcasinl", "*.loadcasinh", "*.loadcasinhf", "*.loadcasinhl", "*.loadcatan", "*.loadcatanf", "*.loadcatanl", "*.loadcatanh", "*.loadcatanhf", "*.loadcatanhl", "*.loadccos", "*.loadccosf", "*.loadccosl", "*.loadccosh", "*.loadccoshf", "*.loadccoshl", "*.loadcexp", "*.loadcexpf", "*.loadcexpl", "*.loadcimag", "*.loadcimagf", "*.loadcimagl", "*.loadclog", "*.loadclogf", "*.loadclogl", "*.loadclog10", "*.loadclog10f", "*.loadclog10l", "*.loadconj", "*.loadconjf", "*.loadconjl", "*.loadcpow", "*.loadcpowf", "*.loadcpowl", "*.loadcproj", "*.loadcprojf", "*.loadcprojl", "*.loadcreal", "*.loadcrealf", "*.loadcreall", "*.loadcsin", "*.loadcsinf", "*.loadcsinl", "*.loadcsinh", "*.loadcsinhf", "*.loadcsinhl", "*.loadcsqrt", "*.loadcsqrtf", "*.loadcsqrtl", "*.loadctan", "*.loadctanf", "*.loadctanl", "*.loadctanh", "*.loadctanhf", "*.loadctanhl", "*.loadj0", "*.loadj1", "*.loadjn", "*.loady0", "*.loady1", "*.loadyn", "*.loadj0f", "*.loadj1f", "*.loadjnf", "*.loady0f", "*.loady1f", "*.loadynf", "*.loadj0l", "*.loadj1l", "*.loadjnl", "*.loady0l", "*.loady1l", "*.loadynl", "*.loadlgamma_r", "*.loadlgammaf_r", "*.loadlgammal_r", "*.loadsigngam", "*.loadfinite", "*.loadfinitef", "*.loadfinitel", "*.loadisinf", "*.loadisinff", "*.loadisinfl", "*.loadisnan", "*.loadisnanf", "*.loadisnanl", "*.loadisnormal", "*.loadisfinite", "*.loadfpclassify", "*.loadsignbit", "*.loadisgreater", "*.loadisgreaterequal", "*.loadisless", "*.loadislessequal", "*.loadislessgreater", "*.loadisunordered", "*.load__fpclassify", "*.load__fpclassifyf", "*.load__fpclassifyl", "*.load__isnan", "*.load__isnanf", "*.load__isnanl", "*.load__finite", "*.load__finitef", "*.load__finitel", "*.load__isinf", "*.load__isinff", "*.load__isinfl", "*.load__signbit", "*.load__signbitf", "*.load__signbitl", "*.loadmatherr", "*.load_LIB_VERSION", "*.loadSVID", "*.loadX_OPEN", "*.loadPOSIX", "*.loadIEEE", "*.loadHUGE", "*.loadHUGE_VAL", "*.loadHUGE_VALF", "*.loadHUGE_VALL", "*.loadINFINITY", "*.loadNAN", "*.loadM_E", "*.loadM_LOG2E", "*.loadM_LOG10E", "*.loadM_LN2", "*.loadM_LN10", "*.loadM_PI", "*.loadM_PI_2", "*.loadM_PI_4", "*.loadM_1_PI", "*.loadM_2_PI", "*.loadM_2_SQRTPI", "*.loadM_SQRT2", "*.loadM_SQRT1_2", "*.loadFP_NAN", "*.loadFP_INFINITE", "*.loadFP_ZERO", "*.loadFP_SUBNORMAL", "*.loadFP_NORMAL", "*.loadFP_FAST_FMA", "*.loadFP_FAST_FMAF", "*.loadFP_FAST_FMAL", "*.loadFP_ILOGB0", "*.loadFP_ILOGBNAN", "*.loadMATH_ERRNO", "*.loadMATH_ERREXCEPT", "*.loadmath_errhandling", "*.loadFE_DIVBYZERO", "*.loadFE_INEXACT", "*.loadFE_INVALID", "*.loadFE_OVERFLOW", "*.loadFE_UNDERFLOW", "*.loadFE_ALL_EXCEPT", "*.loadFE_DOWNWARD", "*.loadFE_TONEAREST", "*.loadFE_TOWARDZERO", "*.loadFE_UPWARD", "*.loadFE_DFL_ENV", "*.loadDBL_DIG", "*.loadDBL_EPSILON", "*.loadDBL_MANT_DIG", "*.loadDBL_MAX", "*.loadDBL_MAX_10_EXP", "*.loadDBL_MAX_EXP", "*.loadDBL_MIN", "*.loadDBL_MIN_10_EXP", "*.loadDBL_MIN_EXP", "*.loadFLT_DIG", "*.loadFLT_EPSILON", "*.loadFLT_MANT_DIG", "*.loadFLT_MAX", "*.loadFLT_MAX_10_EXP", "*.loadFLT_MAX_EXP", "*.loadFLT_MIN", "*.loadFLT_MIN_10_EXP", "*.loadFLT_MIN_EXP", "*.loadFLT_RADIX", "*.loadFLT_ROUNDS", "*.loadLDBL_DIG", "*.loadLDBL_EPSILON", "*.loadLDBL_MANT_DIG", "*.loadLDBL_MAX", "*.loadLDBL_MAX_10_EXP", "*.loadLDBL_MAX_EXP", "*.loadLDBL_MIN", "*.loadLDBL_MIN_10_EXP", "*.loadLDBL_MIN_EXP", "*.loadDECIMAL_DIG", "*.loadFLT_EVAL_METHOD", "*.loadCHAR_BIT", "*.loadCHAR_MAX", "*.loadCHAR_MIN", "*.loadINT_MAX", "*.loadINT_MIN", "*.loadLONG_MAX", "*.loadLONG_MIN", "*.loadLLONG_MAX", "*.loadLLONG_MIN", "*.loadMB_LEN_MAX", "*.loadSCHAR_MAX", "*.loadSCHAR_MIN", "*.loadSHRT_MAX", "*.loadSHRT_MIN", "*.loadUCHAR_MAX", "*.loadUINT_MAX", "*.loadULONG_MAX", "*.loadULLONG_MAX", "*.loadUSHRT_MAX", "*.loadPTRDIFF_MAX", "*.loadPTRDIFF_MIN", "*.loadSIG_ATOMIC_MAX", "*.loadSIG_ATOMIC_MIN", "*.loadSIZE_MAX", "*.loadWCHAR_MAX", "*.loadWCHAR_MIN", "*.loadWINT_MAX", "*.loadWINT_MIN", "*.loadINT8_MAX", "*.loadINT16_MAX", "*.loadINT32_MAX", "*.loadINT64_MAX", "*.loadINT8_MIN", "*.loadINT16_MIN", "*.loadINT32_MIN", "*.loadINT64_MIN", "*.loadUINT8_MAX", "*.loadUINT16_MAX", "*.loadUINT32_MAX", "*.loadUINT64_MAX", "*.loadINT_LEAST8_MAX", "*.loadINT_LEAST16_MAX", "*.loadINT_LEAST32_MAX", "*.loadINT_LEAST64_MAX", "*.loadINT_LEAST8_MIN", "*.loadINT_LEAST16_MIN", "*.loadINT_LEAST32_MIN", "*.loadINT_LEAST64_MIN", "*.loadUINT_LEAST8_MAX", "*.loadUINT_LEAST16_MAX", "*.loadUINT_LEAST32_MAX", "*.loadUINT_LEAST64_MAX", "*.loadINT_FAST8_MAX", "*.loadINT_FAST16_MAX", "*.loadINT_FAST32_MAX", "*.loadINT_FAST64_MAX", "*.loadINT_FAST8_MIN", "*.loadINT_FAST16_MIN", "*.loadINT_FAST32_MIN", "*.loadINT_FAST64_MIN", "*.loadUINT_FAST8_MAX", "*.loadUINT_FAST16_MAX", "*.loadUINT_FAST32_MAX", "*.loadUINT_FAST64_MAX", "*.loadINTMAX_MAX", "*.loadINTMAX_MIN", "*.loadUINTMAX_MAX", "*.loadINTMAX_C", "*.loadUINTMAX_C", "*.loadINT8_C", "*.loadINT16_C", "*.loadINT32_C", "*.loadINT64_C", "*.loadUINT8_C", "*.loadUINT16_C", "*.loadUINT32_C", "*.loadUINT64_C", "*.loadPRId8", "*.loadPRId16", "*.loadPRId32", "*.loadPRId64", "*.loadPRIdLEAST8", "*.loadPRIdLEAST16", "*.loadPRIdLEAST32", "*.loadPRIdLEAST64", "*.loadPRIdFAST8", "*.loadPRIdFAST16", "*.loadPRIdFAST32", "*.loadPRIdFAST64", "*.loadPRIdMAX", "*.loadPRIdPTR", "*.loadPRIi8", "*.loadPRIi16", "*.loadPRIi32", "*.loadPRIi64", "*.loadPRIiLEAST8", "*.loadPRIiLEAST16", "*.loadPRIiLEAST32", "*.loadPRIiLEAST64", "*.loadPRIiFAST8", "*.loadPRIiFAST16", "*.loadPRIiFAST32", "*.loadPRIiFAST64", "*.loadPRIiMAX", "*.loadPRIiPTR", "*.loadPRIo8", "*.loadPRIo16", "*.loadPRIo32", "*.loadPRIo64", "*.loadPRIoLEAST8", "*.loadPRIoLEAST16", "*.loadPRIoLEAST32", "*.loadPRIoLEAST64", "*.loadPRIoFAST8", "*.loadPRIoFAST16", "*.loadPRIoFAST32", "*.loadPRIoFAST64", "*.loadPRIoMAX", "*.loadPRIoPTR", "*.loadPRIu8", "*.loadPRIu16", "*.loadPRIu32", "*.loadPRIu64", "*.loadPRIuLEAST8", "*.loadPRIuLEAST16", "*.loadPRIuLEAST32", "*.loadPRIuLEAST64", "*.loadPRIuFAST8", "*.loadPRIuFAST16", "*.loadPRIuFAST32", "*.loadPRIuFAST64", "*.loadPRIuMAX", "*.loadPRIuPTR", "*.loadPRIx8", "*.loadPRIx16", "*.loadPRIx32", "*.loadPRIx64", "*.loadPRIxLEAST8", "*.loadPRIxLEAST16", "*.loadPRIxLEAST32", "*.loadPRIxLEAST64", "*.loadPRIxFAST8", "*.loadPRIxFAST16", "*.loadPRIxFAST32", "*.loadPRIxFAST64", "*.loadPRIxMAX", "*.loadPRIxPTR", "*.loadPRIX8", "*.loadPRIX16", "*.loadPRIX32", "*.loadPRIX64", "*.loadPRIXLEAST8", "*.loadPRIXLEAST16", "*.loadPRIXLEAST32", "*.loadPRIXLEAST64", "*.loadPRIXFAST8", "*.loadPRIXFAST16", "*.loadPRIXFAST32", "*.loadPRIXFAST64", "*.loadPRIXMAX", "*.loadPRIXPTR", "*.loadSCNd8", "*.loadSCNd16", "*.loadSCNd32", "*.loadSCNd64", "*.loadSCNdLEAST8", "*.loadSCNdLEAST16", "*.loadSCNdLEAST32", "*.loadSCNdLEAST64", "*.loadSCNdFAST8", "*.loadSCNdFAST16", "*.loadSCNdFAST32", "*.loadSCNdFAST64", "*.loadSCNdMAX", "*.loadSCNdPTR", "*.loadSCNi8", "*.loadSCNi16", "*.loadSCNi32", "*.loadSCNi64", "*.loadSCNiLEAST8", "*.loadSCNiLEAST16", "*.loadSCNiLEAST32", "*.loadSCNiLEAST64", "*.loadSCNiFAST8", "*.loadSCNiFAST16", "*.loadSCNiFAST32", "*.loadSCNiFAST64", "*.loadSCNiMAX", "*.loadSCNiPTR", "*.loadSCNo8", "*.loadSCNo16", "*.loadSCNo32", "*.loadSCNo64", "*.loadSCNoLEAST8", "*.loadSCNoLEAST16", "*.loadSCNoLEAST32", "*.loadSCNoLEAST64", "*.loadSCNoFAST8", "*.loadSCNoFAST16", "*.loadSCNoFAST32", "*.loadSCNoFAST64", "*.loadSCNoMAX", "*.loadSCNoPTR", "*.loadSCNu8", "*.loadSCNu16", "*.loadSCNu32", "*.loadSCNu64", "*.loadSCNuLEAST8", "*.loadSCNuLEAST16", "*.loadSCNuLEAST32", "*.loadSCNuLEAST64", "*.loadSCNuFAST8", "*.loadSCNuFAST16", "*.loadSCNuFAST32", "*.loadSCNuFAST64", "*.loadSCNuMAX", "*.loadSCNuPTR", "*.loadSCNx8", "*.loadSCNx16", "*.loadSCNx32", "*.loadSCNx64", "*.loadSCNxLEAST8", "*.loadSCNxLEAST16", "*.loadSCNxLEAST32", "*.loadSCNxLEAST64", "*.loadSCNxFAST8", "*.loadSCNxFAST16", "*.loadSCNxFAST32", "*.loadSCNxFAST64", "*.loadSCNxMAX", "*.loadSCNxPTR", "*.loadSCNX8", "*.loadSCNX16", "*.loadSCNX32", "*.loadSCNX64", "*.loadSCNXLEAST8", "*.loadSCNXLEAST16", "*.loadSCNXLEAST32", "*.loadSCNXLEAST64", "*.loadSCNXFAST8", "*.loadSCNXFAST16", "*.loadSCNXFAST32", "*.loadSCNXFAST64", "*.loadSCNXMAX", "*.loadSCNXPTR"]
+
+[tool.black]
+line-length = 120
+target-version = ['py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 120
+known_first_party = ["blueprintbot_v2"]
+known_third_party = ["fastapi", "pydantic", "sqlalchemy", "qiskit", "tensorflow", "torch"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+strict_optional = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "qiskit.*",
+    "cirq.*",
+    "pennylane.*",
+    "tensorflow.*",
+    "torch.*",
+    "cv2.*",
+    "sklearn.*",
+    "numpy.*",
+    "pandas.*",
+    "matplotlib.*",
+    "plotly.*",
+    "scipy.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "src/tests",
+    "tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "quantum: marks tests that require quantum computing resources",
+    "gpu: marks tests that require GPU resources",
+    "e2e: marks tests as end-to-end tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "src/tests"]
+skips = ["B101", "B601"]
+
+[tool.pylint.messages_control]
+disable = [
+    "C0330",  # Wrong hanging indentation before block (black handles this)
+    "C0326",  # Bad whitespace (black handles this)
+    "R0903",  # Too few public methods
+    "R0913",  # Too many arguments
+    "W0613",  # Unused argument
+    "C0103",  # Invalid name (for variables like 'x', 'y', etc.)
+]
+
+[tool.pylint.format]
+max-line-length = "120"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "2.0.0"
+tag_format = "v$version"
+version_files = [
+    "pyproject.toml:version",
+    "src/blueprintbot_v2/__init__.py:__version__",
+]
+
+[tool.semantic_release]
+version_variable = [
+    "pyproject.toml:version",
+    "src/blueprintbot_v2/__init__.py:__version__",
+]
+build_command = "pip install build && python -m build"
+upload_to_pypi = false
+upload_to_release = true
+hvcs = "github"
+commit_author = "github-actions <action@github.com>"
+

@@ -1,0 +1,102 @@
+# BlueprintBot v2 - Test Dependencies
+# This file contains all dependencies required for testing
+
+# Core testing framework
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+pytest-html==4.1.1
+pytest-json-report==1.5.0
+pytest-benchmark==4.0.0
+pytest-timeout==2.2.0
+pytest-randomly==3.15.0
+
+# Web testing
+pytest-httpx==0.26.0
+httpx==0.25.2
+requests==2.31.0
+responses==0.24.1
+
+# Database testing
+pytest-postgresql==5.0.0
+pytest-redis==3.0.2
+pytest-mongodb==2.4.2
+
+# Async testing
+pytest-asyncio==0.21.1
+aioresponses==0.7.6
+
+# Mocking and fixtures
+factory-boy==3.3.0
+faker==20.1.0
+freezegun==1.2.2
+
+# Performance testing
+locust==2.17.0
+pytest-benchmark==4.0.0
+memory-profiler==0.61.0
+
+# Security testing
+bandit==1.7.5
+safety==2.3.5
+
+# Code quality
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+isort==5.12.0
+pre-commit==3.6.0
+
+# Quantum testing
+qiskit[test]==0.46.0
+cirq[testing]==1.3.0
+pennylane[testing]==0.33.1
+
+# AI/ML testing
+torch==2.1.2
+tensorflow==2.15.0
+scikit-learn==1.3.2
+numpy==1.24.4
+pandas==2.1.4
+
+# API testing
+fastapi[test]==0.104.1
+starlette[test]==0.27.0
+
+# Documentation testing
+sphinx==7.2.6
+sphinx-rtd-theme==1.3.0
+
+# Load testing
+locust==2.17.0
+artillery==1.7.9
+
+# Browser testing (for E2E)
+playwright==1.40.0
+selenium==4.15.2
+
+# Monitoring and observability testing
+prometheus-client==0.19.0
+opentelemetry-api==1.21.0
+opentelemetry-sdk==1.21.0
+
+# Container testing
+testcontainers==3.7.1
+docker==6.1.3
+
+# Environment and configuration testing
+python-dotenv==1.0.0
+pydantic[dotenv]==2.5.2
+
+# Logging and debugging
+structlog==23.2.0
+rich==13.7.0
+
+# Utilities
+click==8.1.7
+typer==0.9.0
+pyyaml==6.0.1
+toml==0.10.2
+

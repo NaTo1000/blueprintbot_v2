@@ -1,0 +1,81 @@
+# Prometheus Configuration for BlueprintBot v2
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # BlueprintBot v2 Application
+  - job_name: 'blueprintbot-app'
+    static_configs:
+      - targets: ['blueprintbot-app:9090']
+    metrics_path: /metrics
+    scrape_interval: 10s
+    scrape_timeout: 5s
+
+  # PostgreSQL Database
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    metrics_path: /metrics
+
+  # Redis Cache
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # Elasticsearch
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch:9200']
+    metrics_path: /_prometheus/metrics
+
+  # Node Exporter (if available)
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Docker containers
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['docker-host:9323']
+
+  # Traefik
+  - job_name: 'traefik'
+    static_configs:
+      - targets: ['traefik:8080']
+    metrics_path: /metrics
+
+  # MinIO
+  - job_name: 'minio'
+    static_configs:
+      - targets: ['minio:9000']
+    metrics_path: /minio/prometheus/metrics
+
+  # Celery Worker
+  - job_name: 'celery-worker'
+    static_configs:
+      - targets: ['celery-worker:9091']
+
+  # Custom quantum metrics
+  - job_name: 'quantum-metrics'
+    static_configs:
+      - targets: ['blueprintbot-app:9092']
+    metrics_path: /quantum/metrics
+    scrape_interval: 30s
+
+  # Custom AI metrics
+  - job_name: 'ai-metrics'
+    static_configs:
+      - targets: ['blueprintbot-app:9093']
+    metrics_path: /ai/metrics
+    scrape_interval: 30s
+

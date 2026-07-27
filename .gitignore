@@ -1,0 +1,528 @@
+# BlueprintBot v2 - Git Ignore Configuration
+# This file specifies intentionally untracked files that Git should ignore
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+junit-*.xml
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.test
+.env.production
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Log files
+*.log
+logs/
+log/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Application specific
+data/
+uploads/
+cache/
+reports/
+backups/
+quantum_circuits/saved/
+ai_models/pretrained/
+ai_models/custom/
+blueprints/processed/
+blueprints/archive/
+
+# Docker
+.dockerignore
+
+# Kubernetes
+*.yaml.bak
+*.yml.bak
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Secrets and credentials
+secrets/
+credentials/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Configuration files with sensitive data
+config/production.json
+config/staging.json
+.env.production
+.env.staging
+
+# Performance and profiling
+*.prof
+*.profile
+*.trace
+
+# Security scan results
+bandit-report.json
+safety-report.json
+trivy-results.sarif
+
+# Test artifacts
+test-results/
+test-reports/
+benchmark.json
+load-test-report.html
+smoke-test-results.xml
+api-test-results.xml
+
+# Monitoring and observability
+prometheus-data/
+grafana-data/
+jaeger-data/
+
+# Build artifacts
+build/
+dist/
+out/
+target/
+
+# Package files
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Large files and datasets
+*.csv
+*.json
+*.parquet
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Machine learning models
+*.model
+*.pkl
+*.joblib
+*.h5
+*.pb
+*.onnx
+*.tflite
+
+# Quantum computing files
+*.qasm
+*.qpy
+*.qobj
+
+# Documentation build
+docs/build/
+docs/_build/
+site/
+
+# Jupyter notebooks
+*.ipynb
+
+# R files
+.Rhistory
+.RData
+.Ruserdata
+
+# MATLAB files
+*.asv
+*.m~
+
+# Vim files
+*.swp
+*.swo
+
+# Emacs files
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# SublimeText files
+*.sublime-workspace
+*.sublime-project
+
+# TextMate files
+*.tmproj
+*.tmproject
+tmtags
+
+# Xcode files
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# Android files
+*.apk
+*.ap_
+*.dex
+*.class
+bin/
+gen/
+out/
+build/
+.gradle/
+local.properties
+proguard/
+
+# iOS files
+*.ipa
+*.dSYM.zip
+*.dSYM
+DerivedData/
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+
+# Windows files
+*.exe
+*.msi
+*.msm
+*.msp
+
+# Linux files
+*.AppImage
+*.deb
+*.rpm
+
+# macOS files
+*.dmg
+*.pkg
+
+# Cloud provider specific
+.aws/
+.azure/
+.gcp/
+
+# CI/CD specific
+.github/secrets/
+.gitlab-ci-local/
+.circleci/config.local.yml
+
+# Local development
+.local/
+.dev/
+dev-data/
+local-config/
+
+# Performance monitoring
+newrelic.ini
+.newrelic.yml
+
+# Error tracking
+.sentry-release
+sentry.properties
+
+# Analytics
+.mixpanel
+.segment
+
+# A/B testing
+.optimizely
+.launchdarkly
+
+# Feature flags
+.flagsmith
+.split
+
+# Monitoring
+.datadog
+.honeycomb
+
+# Custom application directories
+quantum_results/
+ai_training_data/
+blueprint_samples/
+user_uploads/
+processed_blueprints/
+generated_reports/
+model_checkpoints/
+experiment_logs/
+performance_metrics/
+security_scans/
+compliance_reports/
+audit_logs/
+backup_archives/
+deployment_artifacts/
+infrastructure_configs/
+monitoring_configs/
+alerting_rules/
+dashboard_configs/
+

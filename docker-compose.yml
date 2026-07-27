@@ -1,0 +1,473 @@
+# BlueprintBot v2 - Production Docker Compose Configuration
+# This configuration sets up a complete production environment with all services
+
+version: '3.8'
+
+services:
+  # Main Application Service
+  blueprintbot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    image: blueprintbot-v2:latest
+    container_name: blueprintbot-app
+    restart: unless-stopped
+    ports:
+      - "8000:8000"    # Main API
+      - "8001:8001"    # WebSocket
+      - "8002:8002"    # gRPC
+      - "9090:9090"    # Prometheus metrics
+    environment:
+      # Application settings
+      - BLUEPRINTBOT_ENV=production
+      - BLUEPRINTBOT_HOST=0.0.0.0
+      - BLUEPRINTBOT_PORT=8000
+      - BLUEPRINTBOT_WORKERS=4
+      - BLUEPRINTBOT_LOG_LEVEL=INFO
+      
+      # Database settings
+      - DATABASE_URL=postgresql://blueprintbot:${POSTGRES_PASSWORD:-blueprintbot123}@postgres:5432/blueprintbot
+      - REDIS_URL=redis://redis:6379/0
+      
+      # Quantum computing settings
+      - IBM_QUANTUM_TOKEN=${IBM_QUANTUM_TOKEN:-}
+      - QUANTUM_BACKEND=qasm_simulator
+      - QUANTUM_TIMEOUT=300
+      
+      # AI settings
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - HUGGINGFACE_TOKEN=${HUGGINGFACE_TOKEN:-}
+      - AI_TIMEOUT=600
+      
+      # Security settings
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-super-secret-jwt-key-change-this}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-your-super-secret-encryption-key}
+      
+      # Performance settings
+      - MAX_UPLOAD_SIZE=104857600
+      - MAX_CONCURRENT_ANALYSES=10
+      
+      # Monitoring settings
+      - PROMETHEUS_PORT=9090
+      - GRAFANA_PORT=3000
+      
+      # Cloud settings
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      
+      # External API settings
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:-}
+      - DOMAIN_NAME=${DOMAIN_NAME:-infinite2025.com}
+    volumes:
+      - blueprintbot-data:/app/data
+      - blueprintbot-logs:/app/logs
+      - blueprintbot-uploads:/app/uploads
+      - blueprintbot-cache:/app/cache
+      - blueprintbot-quantum:/app/quantum_circuits
+      - blueprintbot-ai-models:/app/ai_models
+      - blueprintbot-blueprints:/app/blueprints
+      - blueprintbot-reports:/app/reports
+      - blueprintbot-backups:/app/backups
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 8G
+        reservations:
+          cpus: '2.0'
+          memory: 4G
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blueprintbot.rule=Host(`${DOMAIN_NAME:-localhost}`)"
+      - "traefik.http.routers.blueprintbot.tls=true"
+      - "traefik.http.routers.blueprintbot.tls.certresolver=letsencrypt"
+      - "traefik.http.services.blueprintbot.loadbalancer.server.port=8000"
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: blueprintbot-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=blueprintbot
+      - POSTGRES_USER=blueprintbot
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-blueprintbot123}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U blueprintbot -d blueprintbot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Redis Cache and Message Broker
+  redis:
+    image: redis:7-alpine
+    container_name: blueprintbot-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-redis123}
+    volumes:
+      - redis-data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    ports:
+      - "6379:6379"
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+  # Elasticsearch for Search and Analytics
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: blueprintbot-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 2G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+
+  # Kibana for Elasticsearch Visualization
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: blueprintbot-kibana
+    restart: unless-stopped
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - SERVER_NAME=kibana
+      - SERVER_HOST=0.0.0.0
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Prometheus for Metrics Collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: blueprintbot-prometheus
+    restart: unless-stopped
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9091:9090"
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Grafana for Metrics Visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: blueprintbot-grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin123}
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./docker/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/login || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Jaeger for Distributed Tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: blueprintbot-jaeger
+    restart: unless-stopped
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # Jaeger collector HTTP
+      - "14250:14250"  # Jaeger collector gRPC
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:16686/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # MinIO for Object Storage (S3 Compatible)
+  minio:
+    image: minio/minio:latest
+    container_name: blueprintbot-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD:-minioadmin123}
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - blueprintbot-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Traefik Reverse Proxy
+  traefik:
+    image: traefik:v3.0
+    container_name: blueprintbot-traefik
+    restart: unless-stopped
+    command:
+      - --api.dashboard=true
+      - --api.debug=true
+      - --log.level=INFO
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsencrypt.acme.tlschallenge=true
+      - --certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL:-admin@infinite2025.com}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Traefik dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+    networks:
+      - blueprintbot-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN_NAME:-localhost}`)"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+  # Celery Worker for Background Tasks
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: blueprintbot-v2:latest
+    container_name: blueprintbot-celery-worker
+    restart: unless-stopped
+    command: celery -A src.blueprintbot_v2.core.celery_app worker --loglevel=info --concurrency=4
+    environment:
+      - BLUEPRINTBOT_ENV=production
+      - DATABASE_URL=postgresql://blueprintbot:${POSTGRES_PASSWORD:-blueprintbot123}@postgres:5432/blueprintbot
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - blueprintbot-data:/app/data
+      - blueprintbot-logs:/app/logs
+      - blueprintbot-uploads:/app/uploads
+      - blueprintbot-cache:/app/cache
+      - blueprintbot-quantum:/app/quantum_circuits
+      - blueprintbot-ai-models:/app/ai_models
+      - blueprintbot-blueprints:/app/blueprints
+      - blueprintbot-reports:/app/reports
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - blueprintbot-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+
+  # Celery Beat for Scheduled Tasks
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: blueprintbot-v2:latest
+    container_name: blueprintbot-celery-beat
+    restart: unless-stopped
+    command: celery -A src.blueprintbot_v2.core.celery_app beat --loglevel=info
+    environment:
+      - BLUEPRINTBOT_ENV=production
+      - DATABASE_URL=postgresql://blueprintbot:${POSTGRES_PASSWORD:-blueprintbot123}@postgres:5432/blueprintbot
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - blueprintbot-data:/app/data
+      - blueprintbot-logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - blueprintbot-network
+
+  # Flower for Celery Monitoring
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: blueprintbot-v2:latest
+    container_name: blueprintbot-flower
+    restart: unless-stopped
+    command: celery -A src.blueprintbot_v2.core.celery_app flower --port=5555
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - FLOWER_BASIC_AUTH=${FLOWER_USER:-admin}:${FLOWER_PASSWORD:-admin123}
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+    networks:
+      - blueprintbot-network
+
+# Named Volumes
+volumes:
+  blueprintbot-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data
+  blueprintbot-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./logs
+  blueprintbot-uploads:
+    driver: local
+  blueprintbot-cache:
+    driver: local
+  blueprintbot-quantum:
+    driver: local
+  blueprintbot-ai-models:
+    driver: local
+  blueprintbot-blueprints:
+    driver: local
+  blueprintbot-reports:
+    driver: local
+  blueprintbot-backups:
+    driver: local
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  minio-data:
+    driver: local
+  traefik-letsencrypt:
+    driver: local
+
+# Networks
+networks:
+  blueprintbot-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
