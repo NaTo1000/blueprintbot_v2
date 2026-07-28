@@ -170,6 +170,91 @@ class SupplyChainManager:
         self.orders = {}
         self.order_history = []
         self.cost_analytics = {}
+        self.market_trends = {}
+        self.inventory_levels = {}
+
+    def update_market_trends(self, category: str, price_index: float, demand_index: float) -> None:
+        """Update market trends for a specific category."""
+        self.market_trends[category] = {
+            "price_index": price_index,
+            "demand_index": demand_index,
+            "last_updated": datetime.utcnow().isoformat()
+        }
+        logger.info(f"Updated market trends for {category}: Price={price_index}, Demand={demand_index}")
+
+    def get_dynamic_price(self, supplier_id: str, product_category: str) -> float:
+        """Calculate dynamic price based on supplier base price and market trends."""
+        if supplier_id not in self.suppliers:
+            raise ValueError(f"Supplier {supplier_id} not found")
+            
+        supplier = self.suppliers[supplier_id]
+        base_price = supplier.cost_per_unit
+        
+        trend = self.market_trends.get(product_category, {"price_index": 1.0, "demand_index": 1.0})
+        
+        # Dynamic pricing formula: base_price * price_index * (1 + (demand_index - 1) * 0.5)
+        dynamic_price = base_price * trend["price_index"] * (1 + (trend["demand_index"] - 1) * 0.5)
+        
+        return round(dynamic_price, 2)
+
+    def predict_demand(self, project_id: str, product_category: str, timeframe_days: int) -> int:
+        """Predict material demand based on project specifications and historical data."""
+        # Simplified demand prediction logic
+        base_demand = 100  # Placeholder for actual project-specific demand
+        trend = self.market_trends.get(product_category, {"demand_index": 1.0})
+        
+        predicted_demand = int(base_demand * trend["demand_index"] * (timeframe_days / 30.0))
+        
+        return predicted_demand
+
+    def optimize_procurement(self, product_name: str, product_category: str, quantity: int) -> Dict[str, Any]:
+        """Optimize procurement by finding the best supplier with dynamic pricing."""
+        suitable_suppliers = [
+            s for s in self.suppliers.values()
+            if s.minimum_order_quantity <= quantity and s.compliance_verified and product_category in s.product_categories
+        ]
+        
+        if not suitable_suppliers:
+            return {"error": "No suitable suppliers found"}
+            
+        # Score suppliers based on rating, dynamic cost, and delivery time
+        scored_suppliers = []
+        for supplier in suitable_suppliers:
+            dynamic_price = self.get_dynamic_price(supplier.supplier_id, product_category)
+            score = (
+                (supplier.rating / 5.0) * 0.4 +  # 40% weight on rating
+                (1.0 / (dynamic_price + 1)) * 0.3 +  # 30% weight on cost
+                (1.0 / (supplier.delivery_time_days + 1)) * 0.3  # 30% weight on delivery
+            )
+            scored_suppliers.append((supplier, dynamic_price, score))
+            
+        scored_suppliers.sort(key=lambda x: x[2], reverse=True)
+        best_supplier, best_price, _ = scored_suppliers[0]
+        
+        recommendation = {
+            "product": product_name,
+            "category": product_category,
+            "quantity": quantity,
+            "recommended_supplier": {
+                "id": best_supplier.supplier_id,
+                "name": best_supplier.company_name,
+                "rating": best_supplier.rating,
+                "dynamic_price_per_unit": best_price,
+                "total_cost": best_price * quantity,
+                "delivery_time_days": best_supplier.delivery_time_days
+            },
+            "alternatives": [
+                {
+                    "id": s[0].supplier_id,
+                    "name": s[0].company_name,
+                    "dynamic_price": s[1],
+                    "score": s[2]
+                }
+                for s in scored_suppliers[1:4]  # Top 3 alternatives
+            ]
+        }
+        
+        return recommendation
         
     def register_supplier(self, supplier: SupplierProfile) -> None:
         """Register a new supplier."""
